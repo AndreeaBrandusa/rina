@@ -1,0 +1,24 @@
+﻿@using rina.Models.Identity
+@model RegisterModel
+
+<div class="Sform-container">
+    <form asp-action="Register" id="SignUpForm">
+        <h3>SIGN UP</h3>
+        <input asp-for="Email" type="text" placeholder="email">
+        <input asp-for="Username" type="text" placeholder="username">
+        <input asp-for="Password" type="password" placeholder="password">
+        <input asp-for="Password" type="password" placeholder="confirm password">
+        <ul>
+        <li>
+            <input asp-for="RememberMe" type="checkbox" value="lsRememberMe" id="rememberMe">
+            <label for="rememberMe">Remember me</label>
+        </li>
+        </ul>
+        <button type="submit" class="btn">Sign Up</button>
+        <div class="account">
+            <p>Already have an account?</p>
+            <a href="">LOG IN</a>
+        </div>
+    </form>
+</div>
+
