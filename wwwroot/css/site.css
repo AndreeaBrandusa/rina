@@ -147,7 +147,7 @@ input:focus {
 /*-------------- account-page -----------*/
 .Lform-container {
     width: 50vh;
-    height: 330px;
+    height: 380px;
     position: relative;
     text-align: center;
     padding: 20px 0;
@@ -158,7 +158,7 @@ input:focus {
 
 .Sform-container {
     width: 50vh;
-    height: 400px;
+    height: 450px;
     position: relative;
     text-align: center;
     padding: 20px 0;
