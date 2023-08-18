@@ -33,6 +33,13 @@ input:focus {
     outline: 2px solid #91403a;
 }
 
+
+
+.container {
+    padding-left: 0;
+}
+
+
 /*-------------- driver-pov-page -----------*/
 .start .btn {
     position: relative;
@@ -73,7 +80,7 @@ input:focus {
     .dropdown-content a {
         padding: 12px 16px;
         text-decoration: none;
-        display: block;
+        display: block
     }
 
         .dropdown-content a:hover {
@@ -120,7 +127,7 @@ input:focus {
     }
 
 .left-container {
-    height: calc(100vh - 50px);
+    height: calc(90vh - 80px);
     width: 50vh;
     padding: 5vh 5vh 5vh 5vh;
     background: #bf5d56;

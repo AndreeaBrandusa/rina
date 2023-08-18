@@ -107,6 +107,24 @@ namespace rina.Services
         {
             var user = await _userManager.FindByNameAsync(model.Username);
 
+            /*
+            if (user == null)
+            {
+                return new AuthenticationResult();
+            }
+
+            if (await _userManager.CheckPasswordAsync(user, model.Password) == true)
+            {
+                return new AuthenticationResult();
+            }
+
+            if (await _userManager.CheckPasswordAsync(user, model.Password) == false)
+            {
+                // wrong password
+                return new AuthenticationResult();
+            }
+            */
+
             if (user != null && await _userManager.CheckPasswordAsync(user, model.Password))
             {
                 var authClaims = new List<Claim>()
@@ -150,6 +168,8 @@ namespace rina.Services
         private async Task<bool> RegisterAccountAsync(RegisterModel model)
         {
             var result = await _userManager.CreateAsync(RegisterModelToIdentityUser(model), model.Password);
+
+            Console.WriteLine(result.Errors);
 
             return result.Succeeded;
         }

@@ -1,13 +1,10 @@
-﻿using rina.Services;
+﻿using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Mvc;
 using rina.Models;
 using rina.Models.Identity;
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-
-using Microsoft.AspNetCore.Authentication.Cookies;
-using System.Security.Claims;
-using System.Threading.Tasks;
+using rina.Services;
 
 namespace rina.Controllers
 {
@@ -29,6 +26,7 @@ namespace rina.Controllers
         public async Task<IActionResult> Login(LoginModel model)
         {
             var result = await _identityService.LoginAsync(model);
+
             if (result.Success)
             {
                 await HttpContext.SignInAsync(result.Principal, result.AuthProperties);

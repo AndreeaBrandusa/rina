@@ -1,0 +1,18 @@
+﻿
+- fix sign out
+
+- add site version for each type of user
+
+- add map
+- add page for adding new 
+		vehicles, 
+		routes(select from options below), 
+		stations(select location on map), 
+		drivers
+- fix index page for adding destination and showing on map
+
+- fix remember me
+- fix forgot password
+- fix redirect button on sign up/log in page
+
+- add page with details for each vehicle (stations, route, schedule)
