@@ -63,8 +63,18 @@ namespace rina.Controllers
         [Authorize]
         public async Task<IActionResult> Logout()
         {
+            if (HttpContext.Request.Cookies.Count > 0)
+            {
+                var siteCookies = HttpContext.Request.Cookies.Where(c => 
+                    c.Key.Contains(".AspNetCore.") || 
+                    c.Key.Contains("Microsoft.Authentication"));
+
+                foreach (var cookie in siteCookies)
+                {
+                    Response.Cookies.Delete(cookie.Key);
+                }
+            }
             await HttpContext.SignOutAsync();
-            HttpContext.Response.Cookies.Delete("jwt");
 
             return RedirectToAction("Index", "Home");
         }
