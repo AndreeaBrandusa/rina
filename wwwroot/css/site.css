@@ -1,4 +1,4 @@
-html {
+﻿html {
   font-size: 14px;
 }
 
@@ -13,9 +13,6 @@ html {
   min-height: 100%;
 }
 
-body {
-  margin-bottom: 60px;
-}
 
 /*-------------------------*/
 * {
@@ -36,9 +33,51 @@ input:focus {
 
 
 .container {
-    padding-left: 0;
+    padding: 0;
+    margin-left: 0;
+    margin-right: 0;
+    max-width: unset;
 }
 
+.pb-3 {
+    padding-bottom: 0!important;
+}
+
+.navbar {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    border-bottom: 0 !important;
+    margin-bottom: 0 !important;
+    height: 8vh;
+    z-index: 10;
+}
+
+#select {
+    border-radius: 0;
+    border: 1px solid #bf5d56;
+    font-size: 12px;
+}
+
+#select:focus {
+    outline: 1px solid #91403a;
+}
+
+.btn {
+    color: #bf5d56;
+    border-color: #bf5d56;
+    box-shadow: 0 0 0 0 !important;
+}
+
+    .btn:hover {
+        background-color: #bf5d56;
+        color: white !important;
+        border-color: #bf5d56;
+    }
+
+    .btn:focus {
+        box-shadow: 0 0 0 0 !important;
+        outline: none !important;
+    }
 
 /*-------------- driver-pov-page -----------*/
 .start .btn {
@@ -55,6 +94,145 @@ input:focus {
 
 
 /*-------------- admin-pov-page -----------*/
+/*form fieldset#stations div.select:focus {
+    border-color: red;
+}
+
+form fieldset#stations div.select[data-multiple] div.header {
+    display: none;
+}
+
+form fieldset#stations div.select div.header {
+    content: "↓";
+    display: flex;
+    flex: 1;
+    align-items: center;
+    padding: 0;
+    position: relative;
+    width: auto;
+    box-sizing: border-box;
+    border-width: 1px;
+    border-style: inherit;
+    border-color: inherit;
+    border-radius: inherit;
+}
+
+    form fieldset#stations div.select div.header::after {
+        content: "↓";
+        align-self: stretch;
+        display: flex;
+        align-content: center;
+        justify-content: center;
+        justify-items: center;
+        align-items: center;
+        padding: 0.5em;
+    }
+
+    form fieldset#stations div.select div.header:hover::after {
+        background-color: red;
+    }
+
+.select .header select {
+    appearance: none;
+    font-family: inherit;
+    font-size: inherit;
+    padding: 0;
+    border-width: 0;
+    width: 100%;
+    flex: 1;
+    display: none;
+}
+
+    .select .header select optgroup {
+        display: none;
+    }
+
+.select select div.option {
+    display: none;
+}
+
+form fieldset#stations div.select {
+    user-select: none;
+    box-sizing: border-box;
+    position: relative;
+    border-radius: 4px;
+    border-style: solid;
+    border-width: 0;
+    border-color: gray;
+    width: auto;
+    display: inline-block;
+}
+
+    form fieldset#stations div.select:focus,
+    form fieldset#stations div.select:hover {
+        border-color: blue;
+    }
+
+    form fieldset#stations div.select[data-open] {
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+    }
+
+        form fieldset#stations div.select[data-open] datalist {
+            display: initial;
+        }
+
+    form fieldset#stations div.select datalist {
+        appearance: none;
+        position: absolute;
+        border-style: solid;
+        border-width: 1px;
+        border-color: gray;
+        left: 0;
+        display: none;
+        width: 100%;
+        box-sizing: border-box;
+        z-index: 2;
+        border-bottom-left-radius: 4px;
+        border-bottom-right-radius: 4px;
+    }
+
+        form fieldset#stations div.select datalist div.option {
+            background-color: white;
+            margin-bottom: 1px;
+            cursor: pointer;
+            padding: 0.5em;
+            border-width: 0;
+        }
+
+            form fieldset#stations div.select datalist div.option:hover,
+            form fieldset#stations div.select datalist div.option:focus,
+            form fieldset#stations div.select datalist div.option:checked {
+                background-color: blue;
+                color: white;
+            }
+
+    form fieldset#stations div.select div.optgroup div.option[data-disabled] {
+        color: gray;
+    }
+
+    form fieldset#stations div.select div.optgroup div.option[data-checked] {
+        background-color: blue;
+        color: white;
+    }
+
+    form fieldset#stations div.select div.optgroup div.label {
+        font-weight: bold;
+    }
+
+    form fieldset#stations div.select div.optgroup div.option div.label {
+        font-weight: normal;
+        padding: 0.25em;
+    }
+
+    form fieldset#stations div.select div.header span {
+        
+        width: 100%;
+    }*/
+
+
+
+/*
 .dropbtn {
     color: #7a211b;
     font-size: 15px;
@@ -94,9 +272,10 @@ input:focus {
 .dropdown:hover .dropbtn {
     filter: brightness(130%);
 }
+*/
 
 /*-------------- user-pov-page -----------*/
-.header {
+/*.header {
     padding: 10px 0 40px 0;
     background: #fff1f0;
     z-index: 100;
@@ -124,15 +303,16 @@ input:focus {
     .header a {
         text-decoration: none;
         color: #7a211b;
-    }
+    }*/
 
 .left-container {
-    height: calc(90vh - 80px);
+    height: 92vh;
     width: 50vh;
     padding: 5vh 5vh 5vh 5vh;
     background: #bf5d56;
-    z-index: 100;
+    z-index: 5;
     position: relative;
+    border-left: 0;
 }
 
     .left-container input {
@@ -152,98 +332,94 @@ input:focus {
 }
 
 /*-------------- account-page -----------*/
-.Lform-container {
-    width: 50vh;
-    height: 380px;
-    position: relative;
+.formContainer {
+    width: 25%;
+    height: 100%;
+    position: center;
     text-align: center;
     padding: 20px 0;
     margin: auto;
     box-shadow: 0 0 20px 0px rgba(0,0,0,0.2);
     background: white;
+    margin-top: 10vh;
+    display: flex;
+    justify-content: center;
 }
 
-.Sform-container {
-    width: 50vh;
-    height: 450px;
-    position: relative;
-    text-align: center;
-    padding: 20px 0;
-    margin: auto;
-    box-shadow: 0 0 20px 0px rgba(0,0,0,0.2);
-    background: white;
-}
 
-form {
+
+.formContainer form {
     margin: 0 10px 0 10px;
+    width: 100%;
 }
 
-    form h3 {
+    .formContainer form h3 {
         text-align: center;
         margin-bottom: 40px;
         color: #ad5049;
     }
 
-    form input {
+    .formContainer form input {
         width: 100%;
         height: 30px;
-        margin: 5px 0;
+        margin: 5px 0 0 0;
         padding: 0 10px;
         border: 1px solid #91403a;
         font-size: 12px;
     }
 
-    form .btn {
+    .formContainer form .btn {
         padding: 5px 7px 5px 7px;
         border: none;
         cursor: pointer;
-        margin: 10px 0 30px 0;
+        margin: 20px 0 30px 0;
         background: #ad5049;
         color: white;
+        border-radius: 0;
     }
 
-        form .btn:hover {
+        .formContainer form .btn:hover {
             filter: brightness(130%);
         }
 
-    form ul {
+    .formContainer form ul {
         list-style-type: none;
         margin: 0 3px 30px 3px;
     }
 
-li input {
-    float: left;
-    margin: 0;
-    accent-color: #ad5049;
-}
-
-    li input:focus {
-        outline: 0;
+    .formContainer li input {
+        float: left;
+        margin: 0;
+        accent-color: #ad5049;
     }
 
-li label {
-    position: fixed;
-    float: right;
-    margin: 5px;
+        .formContainer li input:focus {
+            outline: 0;
 }
 
-form li {
-    font-size: 12px;
-    float: left;
-}
-
-    form li:nth-child(n+2) {
+    .formContainer li label {
+        position: fixed;
         float: right;
+        margin: 5px;
     }
 
-form a {
-    text-decoration: none;
-    color: #ad5049;
-}
-
-    form a:hover {
-        filter: brightness(130%);
+    .formContainer form li {
+        font-size: 12px;
+        float: left;
     }
+
+        .formContainer form li:nth-child(n+2) {
+            float: right;
+        }
+
+    .formContainer form a {
+        text-decoration: none;
+        color: #ad5049;
+    }
+
+        .formContainer form a:hover {
+            filter: brightness(130%);
+        }
 
 .account {
     text-align: center;
@@ -252,6 +428,7 @@ form a {
     .account p {
         color: black;
         font-size: 12px;
+        margin-bottom: 0.25rem;
     }
 
     .account a {

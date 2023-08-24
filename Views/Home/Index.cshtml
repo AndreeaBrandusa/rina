@@ -2,3 +2,24 @@
     <input type="text" placeholder="enter starting point">
     <input type="text" placeholder="enter destination">
 </div>
+
+<div id="map"></div>
+
+<script>
+    mapboxgl.accessToken = 'pk.eyJ1IjoiYW5kcmVlYS1icmFuZHVzYSIsImEiOiJjbGd0dGFwdzIwMjA1M3JrOHF3ZmR2N3NvIn0.tP1VOcDml_MHwvq98KkL6g';
+    const map = new mapboxgl.Map({
+        container: 'map', // container ID
+        style: 'mapbox://styles/mapbox/streets-v12', // style URL
+        center: [21.213444, 45.754082], // starting position [lng, lat]
+        zoom: 12.5 // starting zoom
+    });
+
+    // Create a default Marker and add it to the map.
+    const marker = new mapboxgl.Marker({
+        color: '#E74C3C', // Customize the marker color
+        scale: 1.2, // Adjust the marker size
+        draggable: true, // Make the marker draggable if desired
+    })
+    .setLngLat([21.213444, 45.754082])
+    .addTo(map);
+</script>

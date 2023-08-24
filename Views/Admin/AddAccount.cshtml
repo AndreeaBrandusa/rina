@@ -1,19 +1,16 @@
-﻿@using rina.Models.Identity
-@model RegisterModel
+﻿@using rina.Models.Admin
+@model AddAccountModel
 
 <div class="formContainer">
-    <form asp-action="Register" id="SignUpForm">
-        <h3>SIGN UP</h3>
+    <form asp-action="AddAccount" id="AddAccountForm">
+        <h3>ADD ACCOUNT</h3>
         <input asp-for="Email" type="text" placeholder="email">
         <input asp-for="Username" type="text" placeholder="username">
         <input asp-for="Password" type="password" placeholder="password">
         <input asp-for="Password" type="password" placeholder="confirm password">
+        <input asp-for="Role" type="text" placeholder="e.g. driver, admin">
 
-        <button type="submit" class="btn">Sign Up</button>
-        <div class="account">
-            <p>Already have an account?</p>
-            <a asp-action="Login">LOG IN</a>
-        </div>
+        <button type="submit" class="btn">ADD ACCOUNT</button>
     </form>
 </div>
 

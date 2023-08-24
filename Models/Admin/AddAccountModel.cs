@@ -1,6 +1,6 @@
-﻿namespace rina.Models
+﻿namespace rina.Models.Admin
 {
-    public class RegisterModel
+    public class AddAccountModel
     {
         public string? Email { get; set; }
         public string? Username { get; set; }
