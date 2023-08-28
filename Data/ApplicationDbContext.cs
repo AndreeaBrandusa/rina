@@ -107,7 +107,7 @@ namespace rina.Data
             //seed user
             builder.Entity<IdentityUser>().HasData(defaultUser);
 
-            //set user role to driver
+            //set user role to default user
             builder.Entity<IdentityUserRole<string>>().HasData(new IdentityUserRole<string>
             {
                 RoleId = userRoleId,

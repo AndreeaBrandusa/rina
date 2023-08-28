@@ -1,27 +1,29 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace rina.Controllers
 {
+    [Authorize(Roles = "Administrator")]
     public class AdminController : Controller
     {
         // GET: AdminController
-        public ActionResult Index()
+        public IActionResult Index()
         {
             return View();
         }
 
-        public ActionResult AddVehicle()
+        public IActionResult AddVehicle()
         {
             return View();
         }
 
-        public ActionResult AddStation()
+        public IActionResult AddStation()
         {
             return View();
         }
 
-        public ActionResult AddAccount()
+        public IActionResult AddAccount()
         {
             return View();
         }

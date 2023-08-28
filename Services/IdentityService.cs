@@ -113,48 +113,32 @@ namespace rina.Services
         private async Task<AuthenticationResult> AuthenticateAsync(LoginModel model)
         {
             var user = await _userManager.FindByNameAsync(model.Username);
-
-            /*
-            if (user == null)
-            {
-                return new AuthenticationResult();
-            }
-
-            if (await _userManager.CheckPasswordAsync(user, model.Password) == true)
-            {
-                return new AuthenticationResult();
-            }
-
-            if (await _userManager.CheckPasswordAsync(user, model.Password) == false)
-            {
-                // wrong password
-                return new AuthenticationResult();
-            }
-            */
-
             if (user != null && await _userManager.CheckPasswordAsync(user, model.Password))
             {
                 var authClaims = new List<Claim>()
                 {
                     new Claim(ClaimTypes.Name, model.Username),
-                    new Claim(ClaimTypes.Role, "User"),
+                    //new Claim(ClaimTypes.Role, "User"),
                     new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                     new Claim("id", user.Id)
                 };
+
+                var roles = await _userManager.GetRolesAsync(user);
+                foreach (var role in roles)
+                {
+                    authClaims.Add(new Claim(ClaimTypes.Role, role));
+                }
+
+                var hasRole = await _userManager.GetRolesAsync(user);
+                if (hasRole.Count == 0)
+                {
+                    await _userManager.AddToRoleAsync(user, "User");
+                }
 
                 var identity = new ClaimsIdentity(authClaims, CookieAuthenticationDefaults.AuthenticationScheme);
                 var principal = new ClaimsPrincipal(identity);
 
                 var authSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT:Secret"]));
-
-                var defaultrole = _roleManager.FindByNameAsync("User").Result;
-
-                if (defaultrole != null)
-                {
-                    IdentityResult roleResult = await _userManager.AddToRoleAsync(user, defaultrole.Name);
-                    _context.SaveChanges();
-                }
-
                 var token = new JwtSecurityToken(
                     issuer: _configuration["JWT:ValidIssuer"],
                     audience: _configuration["JWT:ValidAudience"],
@@ -162,6 +146,7 @@ namespace rina.Services
                     claims: authClaims,
                     signingCredentials: new SigningCredentials(authSigningKey, SecurityAlgorithms.HmacSha256)
                 );
+
                 var authProperties = new AuthenticationProperties
                 {
                     IsPersistent = true
