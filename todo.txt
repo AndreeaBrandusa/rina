@@ -1,30 +1,23 @@
 ﻿
 - add site version for each type of user
-	- index for driver: enter vehicle name(select from below), select route(starting point), 
-						button for navigate & end trip
+	- index for driver: enter vehicle name(select from below), select route(starting point) 
+						move breakdown reason in left container and make it select
 
-						dopdown for breakdown reason
-							-flat tire
-							-engine breakdown
-							-got in an accident
-							-no fuel
-							-other
+- add db for drivers, vehicles
 
-	- index for admin: add dropdown for add
-
-- add map
-- add page for adding new 
-		-vehicles (name, stations - start, end), 
-		//-routes(select from options below), 
-		-stations(select location on map), 
-		-driver accounts(name, email, password, confirm password)
+- fix page for adding new 
+		-vehicles
+		?-update routes(select from options below)
+		-stations(select location on map)
+		-accounts(make the role type checkbox)
 - fix index page for adding destination and showing on map
 
+- bus simulator
+
+- print errors when signing in/creating new acc
+
+optional:
 - place the map next to the left container
 - make the site responsive
 
 ?- add page with details for each vehicle (stations, route, schedule)
-
-- bus simulator
-
-- make the api

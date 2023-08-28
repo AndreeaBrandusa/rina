@@ -14,7 +14,18 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+    .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>();
+
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("ElevatedRights", policy =>
+    {
+        policy.RequireAuthenticatedUser();
+        policy.RequireRole("Administrator", "Driver", "User");
+    });
+});
+
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddScoped<IdentityService>();

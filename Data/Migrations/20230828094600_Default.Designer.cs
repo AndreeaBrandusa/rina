@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using rina.Data;
 
@@ -11,9 +12,10 @@ using rina.Data;
 namespace rina.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230828094600_Default")]
+    partial class Default
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -47,29 +49,6 @@ namespace rina.Data.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "b988814d-9525-44c6-8c7a-3120f4c87a2c",
-                            ConcurrencyStamp = "b988814d-9525-44c6-8c7a-3120f4c87a2c",
-                            Name = "User",
-                            NormalizedName = "USER"
-                        },
-                        new
-                        {
-                            Id = "3739c010-dd90-4e82-a996-790327db124e",
-                            ConcurrencyStamp = "3739c010-dd90-4e82-a996-790327db124e",
-                            Name = "Driver",
-                            NormalizedName = "DRIVER"
-                        },
-                        new
-                        {
-                            Id = "7dd8ebc4-f11c-4475-bcb4-fa54474c3099",
-                            ConcurrencyStamp = "7dd8ebc4-f11c-4475-bcb4-fa54474c3099",
-                            Name = "Administrator",
-                            NormalizedName = "ADMIN"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -160,53 +139,6 @@ namespace rina.Data.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "f4cf2901-eba8-47bb-86c1-f4cfafff82f4",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "edaa0254-c775-467b-90e8-986648900257",
-                            Email = "admin@gmail.com",
-                            EmailConfirmed = true,
-                            LockoutEnabled = false,
-                            NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEAZya40U1ikg8pbiKsZvbiv0+Fa3Y/8K/G/dX/hLqCQt+4oyNbC9m6R3U2MN6jjW5A==",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "bf1b6647-bd10-4406-9b45-6e84d1146193",
-                            TwoFactorEnabled = false,
-                            UserName = "admin"
-                        },
-                        new
-                        {
-                            Id = "447d1146-c58c-4d86-a1e7-6150cefe081a",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "afc8977c-4e1a-4ff0-88f4-e253b41e1431",
-                            Email = "driver@gmail.com",
-                            EmailConfirmed = true,
-                            LockoutEnabled = false,
-                            NormalizedUserName = "DRIVER",
-                            PasswordHash = "AQAAAAEAACcQAAAAEG0xh9XiApdNmyso1dJbMss5fpoZlSJ1mSCZimSS90bbQ5q92vMvbcFfAd6OyO15cw==",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "d01467eb-452b-4807-9106-4b25303f0c07",
-                            TwoFactorEnabled = false,
-                            UserName = "driver"
-                        },
-                        new
-                        {
-                            Id = "8bcf4da1-e7af-44f7-9c5c-759879c434eb",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "d1d80d67-ebbe-4d75-bb88-f27540e324d1",
-                            Email = "andreea@gmail.com",
-                            EmailConfirmed = true,
-                            LockoutEnabled = false,
-                            NormalizedUserName = "ANDREEA",
-                            PasswordHash = "AQAAAAEAACcQAAAAENaiJ8OdJ9rpJtnmSGZ679rl1Ab3PDMl2ULyMH56HlCE1D966UkrB8xJhKeEdK4rnw==",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "38f1a853-1520-4361-8aea-a1b953438618",
-                            TwoFactorEnabled = false,
-                            UserName = "andreea"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -271,23 +203,6 @@ namespace rina.Data.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            UserId = "f4cf2901-eba8-47bb-86c1-f4cfafff82f4",
-                            RoleId = "7dd8ebc4-f11c-4475-bcb4-fa54474c3099"
-                        },
-                        new
-                        {
-                            UserId = "447d1146-c58c-4d86-a1e7-6150cefe081a",
-                            RoleId = "3739c010-dd90-4e82-a996-790327db124e"
-                        },
-                        new
-                        {
-                            UserId = "8bcf4da1-e7af-44f7-9c5c-759879c434eb",
-                            RoleId = "b988814d-9525-44c6-8c7a-3120f4c87a2c"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>

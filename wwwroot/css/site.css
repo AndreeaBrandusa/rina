@@ -63,15 +63,17 @@ input:focus {
 }
 
 .btn {
-    color: #bf5d56;
-    border-color: #bf5d56;
+    color: white;
+    background-color: #91403a;
+    border-color: #91403a;
+    font-size: 0.9rem;
     box-shadow: 0 0 0 0 !important;
 }
 
     .btn:hover {
-        background-color: #bf5d56;
-        color: white !important;
-        border-color: #bf5d56;
+        color: #bf5d56 !important;
+        background-color: #91403a;
+        border-color: #91403a;
     }
 
     .btn:focus {

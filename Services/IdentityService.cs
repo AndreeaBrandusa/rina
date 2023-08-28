@@ -22,13 +22,20 @@ namespace rina.Services
         private ApplicationDbContext _context;
         private UserManager<IdentityUser> _userManager;
         private SignInManager<IdentityUser> _signInManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
         private IConfiguration _configuration;
 
-        public IdentityService(ApplicationDbContext context, UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager, IConfiguration configuration)
+        public IdentityService(
+            ApplicationDbContext context, 
+            UserManager<IdentityUser> userManager, 
+            SignInManager<IdentityUser> signInManager,
+            RoleManager<IdentityRole> roleManager, 
+            IConfiguration configuration)
         {
             _context = context;
             _userManager = userManager;
             _signInManager = signInManager;
+            _roleManager = roleManager;
             _configuration = configuration;
         }
 
@@ -130,6 +137,7 @@ namespace rina.Services
                 var authClaims = new List<Claim>()
                 {
                     new Claim(ClaimTypes.Name, model.Username),
+                    new Claim(ClaimTypes.Role, "User"),
                     new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                     new Claim("id", user.Id)
                 };
@@ -138,6 +146,14 @@ namespace rina.Services
                 var principal = new ClaimsPrincipal(identity);
 
                 var authSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT:Secret"]));
+
+                var defaultrole = _roleManager.FindByNameAsync("User").Result;
+
+                if (defaultrole != null)
+                {
+                    IdentityResult roleResult = await _userManager.AddToRoleAsync(user, defaultrole.Name);
+                    _context.SaveChanges();
+                }
 
                 var token = new JwtSecurityToken(
                     issuer: _configuration["JWT:ValidIssuer"],

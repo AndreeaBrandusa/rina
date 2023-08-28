@@ -1,7 +1,51 @@
-﻿<div class="left-container">
-    <input type="text" placeholder="enter starting point">
-    <input type="text" placeholder="enter destination">
-</div>
+﻿@if (User.IsInRole("Administrator"))
+{
+        
+}
+
+@if (User.IsInRole("Driver"))
+{
+    <div class="left-container">
+        <input type="text" placeholder="enter vehicle name">
+
+        <fieldset id="route" class="p-3" style="border: 1px solid #ad5049; margin-top: 10px; margin-bottom: 5vh;">
+            <legend class="float-none w-auto px-3" style="text-align: left; font-size: 0.9rem; color: #91403a;">
+                Select route
+            </legend>
+
+            <select name="route" id="select" autocomplete="off" placeholder="select route" required style="width: 100%; padding: 5px 0 5px 0; color: gray;">
+                <option>station 1 - station 4</option>
+                <option>station 4 - station 1</option>
+            </select>
+        </fieldset>
+
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit" 
+            style="">
+            Navigate
+        </button>
+
+        <fieldset id="breakdownReason" class="p-3" style="border: 1px solid #ad5049; margin-top: 30vh; margin-bottom: 10vh;">
+            <legend class="float-none w-auto px-3" style="text-align: left; font-size: 0.9rem; color: #91403a;">
+                Select breakdown reason
+            </legend>
+            <select name="breakdownReason" id="select" autocomplete="off" required style="width: 100%; padding: 5px 0 5px 0; color: gray;">
+                <option>Flat tire</option>
+                <option>Engine breakdown</option>
+                <option>Got in an accident</option>
+                <option>No fuel</option>
+                <option>Other</option>
+            </select>
+        </fieldset>
+    </div>
+}
+
+@if (User.IsInRole("User"))
+{
+    <div class="left-container">
+        <input type="text" placeholder="enter starting point">
+        <input type="text" placeholder="enter destination">
+    </div>
+}
 
 <div id="map"></div>
 

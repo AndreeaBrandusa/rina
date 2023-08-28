@@ -20,48 +20,54 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         
-                        <li class="nav-item dropdown">
-                            <a class="nav-link text-dark dropdown-toggle" href="#" id="admindropdownmenu" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Add
-                            </a>
+                        @if (User.IsInRole("Administrator"))
+                        {
+                            <li class="nav-item dropdown">
+                                <a class="nav-link text-dark dropdown-toggle" href="#" id="admindropdownmenu" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Add
+                                </a>
 
-                            <div class="dropdown-menu" aria-labelledby="admindropdownmenu">
-                                <a class="dropdown-item text-dark" asp-area="" asp-controller="Admin" asp-action="AddVehicle">Add Vehicle</a>
+                                <div class="dropdown-menu" aria-labelledby="admindropdownmenu">
+                                    <a class="dropdown-item text-dark" asp-area="" asp-controller="Admin" asp-action="AddVehicle">Add Vehicle</a>
 
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item text-dark" asp-area="" asp-controller="Admin" asp-action="AddStation">Add Station</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item text-dark" asp-area="" asp-controller="Admin" asp-action="AddStation">Add Station</a>
 
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item text-dark" asp-area="" asp-controller="Admin" asp-action="AddAccount">Add Account</a>
-                            </div>
-                        </li>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item text-dark" asp-area="" asp-controller="Admin" asp-action="AddAccount">Add Account</a>
+                                </div>
+                            </li>
+                        }
 
-                        <li class="nav-item dropdown">
-                            <a class="nav-link text-dark dropdown-toggle" href="#" id="driverdropdownmenu" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Breakdown Reason
-                            </a>
+                        @if (User.IsInRole("Driver"))
+                        {
+                            <li class="nav-item dropdown">
+                                <a class="nav-link text-dark dropdown-toggle" href="#" id="driverdropdownmenu" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Breakdown Reason
+                                </a>
 
-                            <div class="dropdown-menu" aria-labelledby="driverdropdownmenu">
-                                <button class="dropdown-item text-dark">Flat tire</button>
+                                <div class="dropdown-menu" aria-labelledby="driverdropdownmenu">
+                                    <button class="dropdown-item text-dark">Flat tire</button>
 
-                                <div class="dropdown-divider"></div>
-                                <button class="dropdown-item text-dark">Engine breakdown</button>
+                                    <div class="dropdown-divider"></div>
+                                    <button class="dropdown-item text-dark">Engine breakdown</button>
 
-                                <div class="dropdown-divider"></div>
-                                <button class="dropdown-item text-dark">Got in an accident</button>
+                                    <div class="dropdown-divider"></div>
+                                    <button class="dropdown-item text-dark">Got in an accident</button>
 
-                                <div class="dropdown-divider"></div>
-                                <button class="dropdown-item text-dark">No fuel</button>
+                                    <div class="dropdown-divider"></div>
+                                    <button class="dropdown-item text-dark">No fuel</button>
 
-                                <div class="dropdown-divider"></div>
-                                <button class="dropdown-item text-dark">Other</button>
-                            </div>
-                        </li>
+                                    <div class="dropdown-divider"></div>
+                                    <button class="dropdown-item text-dark">Other</button>
+                                </div>
+                            </li>
 
-                        <li class="nav-item">
-                            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Navigate</button>
-                            @*<button class="btn btn-outline-success my-2 my-sm-0" type="submit">End trip</button>*@
-                        </li>
+                            <li class="nav-item">
+                                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Navigate</button>
+                                @*<button class="btn btn-outline-success my-2 my-sm-0" type="submit">End trip</button>*@
+                            </li>
+                        }
                     </ul>
                 </div>
 

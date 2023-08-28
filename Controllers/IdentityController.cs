@@ -11,10 +11,12 @@ namespace rina.Controllers
     public class IdentityController : Controller
     {
         private IdentityService _identityService;
+        
 
         public IdentityController(IdentityService service)
         {
             _identityService = service;
+            
         }
 
         public IActionResult Login()
