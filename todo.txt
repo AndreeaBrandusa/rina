@@ -1,23 +1,21 @@
 ﻿
-- add site version for each type of user
-	- index for driver: enter vehicle name(select from below), select route(starting point) 
-						move breakdown reason in left container and make it select
-
-- add db for drivers, vehicles
+- index for driver: enter vehicle name(select from below), select route(starting point)
+- add db for	vehicles
+				vehicle stations
+				route (has an id (from which we know what driver has that route), multiple stations)
+				stations
 
 - fix page for adding new 
 		-vehicles
-		?-update routes(select from options below)
 		-stations(select location on map)
-		-accounts(make the role type checkbox)
 - fix index page for adding destination and showing on map
 
 - bus simulator
 
-- print errors when signing in/creating new acc
-
 optional:
+- print errors when signing in/creating new acc
 - place the map next to the left container
 - make the site responsive
 
 ?- add page with details for each vehicle (stations, route, schedule)
+?-update routes(select from options below)

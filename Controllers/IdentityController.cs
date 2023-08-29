@@ -80,5 +80,22 @@ namespace rina.Controllers
 
             return RedirectToAction("Index", "Home");
         }
+
+        [Authorize(Roles = "Administrator")]
+        public IActionResult AddAccount()
+        {
+            return View();
+        }
+
+        public async Task<IActionResult> AddNewAccount(RegisterModel model)
+        {
+            var result = await _identityService.CreateAccountAsync(model);
+            if (result.Success)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
+            return RedirectToAction(nameof(AddAccount), "Identity");
+        }
     }
 }

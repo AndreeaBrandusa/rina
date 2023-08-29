@@ -2,7 +2,7 @@
 @model RegisterModel
 
 <div class="formContainer">
-    <form asp-action="AddAccount" id="AddAccountForm">
+    <form asp-action="AddNewAccount" id="AddAccountForm">
         <h3>ADD ACCOUNT</h3>
         <input asp-for="Email" type="text" placeholder="email">
         <input asp-for="Username" type="text" placeholder="username">
@@ -10,13 +10,13 @@
         <input asp-for="Password" type="password" placeholder="confirm password">
 
         <div class="form-check" style="margin-top: 2vh; font-size: 14px;">
-            <input asp-for="Role" type="radio" class="form-check-input" id="radio1" name="optradio" value="option1"
+            <input asp-for="Role" type="radio" class="form-check-input" id="radio1" name="role" value="DRIVER" required
                 style="width: 1em; height: 1em; padding: 0;">
             <label class="form-check-label" for="radio1" style="float: left;">Driver account</label>
         </div>
 
         <div class="form-check" style="font-size: 14px;">
-            <input asp-for="Role" type="radio" class="form-check-input" id="radio2" name="optradio" value="option2"
+            <input asp-for="Role" type="radio" class="form-check-input" id="radio2" name="role" value="ADMIN"
                 style="width: 1em; height: 1em; padding: 0;">
             <label class="form-check-label" for="radio2" style="float: left;">Admin account</label>
         </div>

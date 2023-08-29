@@ -74,6 +74,32 @@ namespace rina.Services
             return await AuthenticateAsync(RegisterModelToLoginModel(model));
         }
 
+        public async Task<AuthenticationResult> CreateAccountAsync(RegisterModel model)
+        {
+            if (!ValidateRegisterModel(model))
+            {
+                // invalid model
+                return new AuthenticationResult();
+            }
+
+            if (!await CanRegister(model.Username, model.Email))
+            {
+                return new AuthenticationResult();
+            }
+
+            if (!await RegisterAccountAsync(model))
+            {
+                // unable to register account
+                return new AuthenticationResult();
+            }
+
+            // account created
+            return new AuthenticationResult
+            {
+                Success = true
+            };
+        }
+
         private bool ValidateLoginModel(LoginModel model)
         {
             if (model == null)
@@ -169,6 +195,9 @@ namespace rina.Services
         private async Task<bool> RegisterAccountAsync(RegisterModel model)
         {
             var result = await _userManager.CreateAsync(RegisterModelToIdentityUser(model), model.Password);
+
+            var user = await _userManager.FindByNameAsync(model.Username);
+            await _userManager.AddToRoleAsync(user, model.Role);
 
             Console.WriteLine(result.Errors);
 
