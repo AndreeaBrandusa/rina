@@ -1,6 +1,8 @@
 ﻿using rina.Data;
 using rina.Models;
+using rina.Entities;
 using rina.Models.Identity;
+
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
@@ -9,33 +11,24 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-
 namespace rina.Services
 {
     public class IdentityService
     {
         private ApplicationDbContext _context;
-        private UserManager<IdentityUser> _userManager;
-        private SignInManager<IdentityUser> _signInManager;
-        private readonly RoleManager<IdentityRole> _roleManager;
+        private UserManager<ApplicationUser> _userManager;
+        private SignInManager<ApplicationUser> _signInManager;
         private IConfiguration _configuration;
 
         public IdentityService(
             ApplicationDbContext context, 
-            UserManager<IdentityUser> userManager, 
-            SignInManager<IdentityUser> signInManager,
-            RoleManager<IdentityRole> roleManager, 
+            UserManager<ApplicationUser> userManager, 
+            SignInManager<ApplicationUser> signInManager,
             IConfiguration configuration)
         {
             _context = context;
             _userManager = userManager;
             _signInManager = signInManager;
-            _roleManager = roleManager;
             _configuration = configuration;
         }
 
@@ -222,9 +215,9 @@ namespace rina.Services
             return true;
         }
 
-        private IdentityUser RegisterModelToIdentityUser(RegisterModel model)
+        private ApplicationUser RegisterModelToIdentityUser(RegisterModel model)
         {
-            return new IdentityUser
+            return new ApplicationUser
             {
                 Id = Guid.NewGuid().ToString(),
                 UserName = model.Username,

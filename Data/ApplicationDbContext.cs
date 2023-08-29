@@ -1,15 +1,25 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using rina.Entities;
 
 namespace rina.Data
 {
-    public class ApplicationDbContext : IdentityDbContext<IdentityUser>
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
         }
+
+        public DbSet<Entities.Route> Route { get; set; }
+        public DbSet<Station> Station { get; set; }
+        public DbSet<Vehicle> Vehicle { get; set; }
+        public DbSet<VehicleLocation> VehicleLocation { get; set; }
+        public DbSet<VehicleDriver> VehicleDriver { get; set; }
+        public DbSet<VehicleLocation> ApplicationUser { get; set; }
+        
+
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -43,7 +53,8 @@ namespace rina.Data
             });
             #endregion Roles
 
-            var adminUser = new IdentityUser
+            #region Add Admin Account
+            var adminUser = new ApplicationUser
             {
                 Id = Guid.NewGuid().ToString(),
                 Email = "admin@gmail.com",
@@ -53,11 +64,11 @@ namespace rina.Data
             };
 
             //set user password
-            PasswordHasher<IdentityUser> ph = new PasswordHasher<IdentityUser>();
+            PasswordHasher<ApplicationUser> ph = new PasswordHasher<ApplicationUser>();
             adminUser.PasswordHash = ph.HashPassword(adminUser, "!Ab12345");
 
             //seed user
-            builder.Entity<IdentityUser>().HasData(adminUser);
+            builder.Entity<ApplicationUser>().HasData(adminUser);
 
             //set user role to admin
             builder.Entity<IdentityUserRole<string>>().HasData(new IdentityUserRole<string>
@@ -65,9 +76,10 @@ namespace rina.Data
                 RoleId = adminRoleId,
                 UserId = adminUser.Id
             });
+            #endregion Add Admin Account
 
-
-            var driverUser = new IdentityUser
+            #region Add Driver Account
+            var driverUser = new ApplicationUser
             {
                 Id = Guid.NewGuid().ToString(),
                 Email = "driver@gmail.com",
@@ -77,11 +89,11 @@ namespace rina.Data
             };
 
             //set user password
-            ph = new PasswordHasher<IdentityUser>();
+            ph = new PasswordHasher<ApplicationUser>();
             driverUser.PasswordHash = ph.HashPassword(driverUser, "!Ab12345");
 
             //seed user
-            builder.Entity<IdentityUser>().HasData(driverUser);
+            builder.Entity<ApplicationUser>().HasData(driverUser);
 
             //set user role to driver
             builder.Entity<IdentityUserRole<string>>().HasData(new IdentityUserRole<string>
@@ -89,9 +101,10 @@ namespace rina.Data
                 RoleId = driverRoleId,
                 UserId = driverUser.Id
             });
+            #endregion Add Driver Account
 
-
-            var defaultUser = new IdentityUser
+            #region Add User Account
+            var defaultUser = new ApplicationUser
             {
                 Id = Guid.NewGuid().ToString(),
                 Email = "andreea@gmail.com",
@@ -101,11 +114,11 @@ namespace rina.Data
             };
 
             //set user password
-            ph = new PasswordHasher<IdentityUser>();
+            ph = new PasswordHasher<ApplicationUser>();
             defaultUser.PasswordHash = ph.HashPassword(defaultUser, "!Ab12345");
 
             //seed user
-            builder.Entity<IdentityUser>().HasData(defaultUser);
+            builder.Entity<ApplicationUser>().HasData(defaultUser);
 
             //set user role to default user
             builder.Entity<IdentityUserRole<string>>().HasData(new IdentityUserRole<string>
@@ -113,8 +126,40 @@ namespace rina.Data
                 RoleId = userRoleId,
                 UserId = defaultUser.Id
             });
+            #endregion Add User Account
+
 
             base.OnModelCreating(builder);
+            builder.Entity<Entities.Route>()
+                .HasKey(x => x.RouteId);
+            builder.Entity<Entities.Route>()
+                .HasMany(route => route.Stations)
+                .WithMany(station => station.Routes);
+
+
+            builder.Entity<Station>()
+                .HasKey(x => x.Id);
+
+
+            builder.Entity<Vehicle>()
+                .HasKey(x => x.VehicleId);
+            builder.Entity<Vehicle>()
+                .HasMany(x => x.Routes)
+                .WithOne(x => x.Vehicle);
+
+
+            builder.Entity<VehicleDriver>()
+                .HasKey(x => x.VehicleDriverId);
+            builder.Entity<VehicleDriver>()
+                .HasOne(x => x.Driver)
+                .WithOne(x => x.VehicleDriver);
+
+
+            builder.Entity<VehicleLocation>()
+                .HasKey(x => x.LocationId);
+            builder.Entity<VehicleLocation>()
+                .HasOne(location => location.Vehicle)
+                .WithMany();
         }
 
         public async Task<bool> SaveAsync()
