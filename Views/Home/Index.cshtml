@@ -1,6 +1,52 @@
-﻿@if (User.IsInRole("Administrator"))
+﻿@*for search*@
+<script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.min.js"></script>
+<link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.css" type="text/css">
+@*for destination*@
+<script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.1.1/mapbox-gl-directions.js"></script>
+<link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.1.1/mapbox-gl-directions.css" type="text/css">
+
+<div id="map"></div>
+
+<script>
+    mapboxgl.accessToken = 'pk.eyJ1IjoiYW5kcmVlYS1icmFuZHVzYSIsImEiOiJjbGd0dGFwdzIwMjA1M3JrOHF3ZmR2N3NvIn0.tP1VOcDml_MHwvq98KkL6g';
+    const map = new mapboxgl.Map({
+        container: 'map', // container ID
+        style: 'mapbox://styles/mapbox/streets-v12', // style URL
+        center: [21.213444, 45.754082], // starting position [lng, lat]
+        zoom: 12.5 // starting zoom
+    });
+
+
+    // Add zoom and rotation controls to the map.
+    map.addControl(new mapboxgl.NavigationControl());
+
+
+    // Add geolocate control to the map
+    map.addControl(
+        new mapboxgl.GeolocateControl({
+            positionOptions: {
+                enableHighAccuracy: true
+            },
+            // When active the map will receive updates to the device's location as it changes.
+            trackUserLocation: true,
+            // Draw an arrow next to the location dot to indicate which direction the device is heading.
+            showUserHeading: true
+        })
+    );
+</script>
+
+@if (User.IsInRole("Administrator"))
 {
-        
+    <script>
+        // Create a default Marker and add it to the map.
+        const marker = new mapboxgl.Marker({
+            color: '#E74C3C', // Customize the marker color
+            scale: 1.2, // Adjust the marker size
+            draggable: true, // Make the marker draggable if desired
+        })
+        .setLngLat([21.213444, 45.754082])
+        .addTo(map);
+    </script>
 }
 
 @if (User.IsInRole("Driver"))
@@ -37,6 +83,19 @@
             </select>
         </fieldset>
     </div>
+
+    <script>
+        // Display navigation directions
+        map.addControl(
+            new MapboxDirections({
+                accessToken: mapboxgl.accessToken,
+                controls: {
+                    profileSwitcher: false
+                }
+            }),
+            'top-left'
+        );
+    </script>
 }
 
 @if (User.IsInRole("User"))
@@ -46,24 +105,3 @@
         <input type="text" placeholder="enter destination">
     </div>
 }
-
-<div id="map"></div>
-
-<script>
-    mapboxgl.accessToken = 'pk.eyJ1IjoiYW5kcmVlYS1icmFuZHVzYSIsImEiOiJjbGd0dGFwdzIwMjA1M3JrOHF3ZmR2N3NvIn0.tP1VOcDml_MHwvq98KkL6g';
-    const map = new mapboxgl.Map({
-        container: 'map', // container ID
-        style: 'mapbox://styles/mapbox/streets-v12', // style URL
-        center: [21.213444, 45.754082], // starting position [lng, lat]
-        zoom: 12.5 // starting zoom
-    });
-
-    // Create a default Marker and add it to the map.
-    const marker = new mapboxgl.Marker({
-        color: '#E74C3C', // Customize the marker color
-        scale: 1.2, // Adjust the marker size
-        draggable: true, // Make the marker draggable if desired
-    })
-    .setLngLat([21.213444, 45.754082])
-    .addTo(map);
-</script>

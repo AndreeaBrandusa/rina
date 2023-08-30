@@ -1,5 +1,67 @@
 ﻿
-<p>45.74716518869609, 21.231415414817413</p>
-<p>45.74741056734637, 21.226795337026623</p>
+<div id="map"></div>
+<pre id="info"></pre>
+<pre id="features"></pre>
+
+@*<p>45.74716518869609, 21.231415414817413</p>
+<p>45.74741056734637, 21.226795337026623</p>*@
 
 
+<script>
+    // Add your Mapbox access token
+    mapboxgl.accessToken = 'pk.eyJ1IjoiYW5kcmVlYS1icmFuZHVzYSIsImEiOiJjbGd0dGFwdzIwMjA1M3JrOHF3ZmR2N3NvIn0.tP1VOcDml_MHwvq98KkL6g';
+    const map = new mapboxgl.Map({
+        container: 'map', // container ID
+        style: 'mapbox://styles/mapbox/streets-v12', // style URL
+        center: [21.213444, 45.754082], // starting position [lng, lat]
+        zoom: 12.5 // starting zoom
+    });
+
+
+    // Create a default Marker and add it to the map.
+    const marker = new mapboxgl.Marker({
+        color: '#E74C3C', // Customize the marker color
+        scale: 1.2, // Adjust the marker size
+        draggable: true, // Make the marker draggable if desired
+    })
+    .setLngLat([21.213444, 45.754082])
+    .addTo(map);
+
+
+    map.on('mousemove', (e) => {
+        // `e.lngLat` is the longitude, latitude geographical position of the event.
+        document.getElementById('info').innerHTML = JSON.stringify(e.lngLat.wrap());
+    });
+
+
+    map.on('mousemove', (e) => {
+        const features = map.queryRenderedFeatures(e.point);
+ 
+        // Limit the number of properties we're displaying for
+        // legibility and performance
+        const displayProperties = [
+            'type',
+            'properties',
+            'id',
+            'layer',
+            'source',
+            'sourceLayer',
+            'state'
+        ];
+ 
+        const displayFeatures = features.map((feat) => {
+            const displayFeat = {};
+            displayProperties.forEach((prop) => {
+                displayFeat[prop] = feat[prop];
+            });
+            return displayFeat;
+        });
+ 
+        // Write object as string with an indent of two spaces.
+        document.getElementById('features').innerHTML = JSON.stringify(
+            displayFeatures,
+            null,
+            2
+        );
+    });
+</script>

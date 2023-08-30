@@ -23,6 +23,12 @@ namespace rina.Controllers
             return View();
         }
 
+        public IActionResult AddRoute()
+        {
+            return View();
+        }
+
+
         public IActionResult AddAccount()
         {
             return View();
