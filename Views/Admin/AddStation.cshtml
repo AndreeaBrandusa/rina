@@ -1,7 +1,6 @@
 ﻿
+
 <div id="map"></div>
-<pre id="info"></pre>
-<pre id="features"></pre>
 
 @*<p>45.74716518869609, 21.231415414817413</p>
 <p>45.74741056734637, 21.226795337026623</p>*@
@@ -28,40 +27,53 @@
     .addTo(map);
 
 
-    map.on('mousemove', (e) => {
+    function add_marker (event) {
+        var coordinates = event.lngLat;
+        console.log('Lng:', coordinates.lng, 'Lat:', coordinates.lat); // modify to add to db
+        marker.setLngLat(coordinates).addTo(map);
+    }
+    map.on('click', add_marker);
+    map.on('click', (e) => {
         // `e.lngLat` is the longitude, latitude geographical position of the event.
         document.getElementById('info').innerHTML = JSON.stringify(e.lngLat.wrap());
     });
 
+    var origin = [21.246275, 45.737673];
+    var destination = [21.225905, 45.749515];
 
-    map.on('mousemove', (e) => {
-        const features = map.queryRenderedFeatures(e.point);
- 
-        // Limit the number of properties we're displaying for
-        // legibility and performance
-        const displayProperties = [
-            'type',
-            'properties',
-            'id',
-            'layer',
-            'source',
-            'sourceLayer',
-            'state'
-        ];
- 
-        const displayFeatures = features.map((feat) => {
-            const displayFeat = {};
-            displayProperties.forEach((prop) => {
-                displayFeat[prop] = feat[prop];
+
+    map.on('load', () => {
+        fetch(
+            `https://api.mapbox.com/directions/v5/mapbox/driving/${origin[0]},${origin[1]};${destination[0]},${destination[1]}?access_token=${mapboxgl.accessToken}`
+            )
+        .then((response) => response.json())
+        .then((data) => {
+            var route = data.routes[0].geometry;
+			
+		    var decodedRoute = polyline.toGeoJSON(route);
+            console.log(decodedRoute);
+            map.addSource('route', {
+                'type': 'geojson',
+                'data': {
+                    'type': 'Feature',
+                    'properties': {},
+                    'geometry': decodedRoute
+                }
             });
-            return displayFeat;
+            map.addLayer({
+                'id': 'route',
+                'type': 'line',
+                'source': 'route',
+                'layout': {
+                    'line-join': 'round',
+                    'line-cap': 'round'
+                },
+                'paint': {
+                    'line-color': '#888',
+                    'line-width': 8
+                }
+            });
         });
- 
-        // Write object as string with an indent of two spaces.
-        document.getElementById('features').innerHTML = JSON.stringify(
-            displayFeatures,
-            null,
-            2
-        );
     });
+    
 </script>

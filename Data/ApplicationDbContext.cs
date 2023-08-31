@@ -15,9 +15,8 @@ namespace rina.Data
         public DbSet<Entities.Route> Route { get; set; }
         public DbSet<Station> Station { get; set; }
         public DbSet<Vehicle> Vehicle { get; set; }
-        public DbSet<VehicleLocation> VehicleLocation { get; set; }
         public DbSet<VehicleDriver> VehicleDriver { get; set; }
-        public DbSet<VehicleLocation> ApplicationUser { get; set; }
+        public DbSet<ApplicationUser> ApplicationUser { get; set; }
         
 
 
@@ -133,33 +132,45 @@ namespace rina.Data
             builder.Entity<Entities.Route>()
                 .HasKey(x => x.RouteId);
             builder.Entity<Entities.Route>()
-                .HasMany(route => route.Stations)
-                .WithMany(station => station.Routes);
+                .HasOne(x => x.Vehicle)
+                .WithMany(x => x.Routes)
+                .HasForeignKey(x => x.VehicleId);
+            builder.Entity<Entities.Route>()
+                .HasMany(x => x.Stations)
+                .WithMany(x => x.Routes);
 
 
             builder.Entity<Station>()
                 .HasKey(x => x.Id);
+            builder.Entity<Station>()
+                .HasMany(x => x.Routes)
+                .WithMany(x => x.Stations);
 
 
             builder.Entity<Vehicle>()
                 .HasKey(x => x.VehicleId);
             builder.Entity<Vehicle>()
                 .HasMany(x => x.Routes)
-                .WithOne(x => x.Vehicle);
+                .WithOne(x => x.Vehicle)
+                .HasForeignKey(x => x.VehicleId);
 
 
             builder.Entity<VehicleDriver>()
-                .HasKey(x => x.VehicleDriverId);
+                .HasKey(x => new { x.Id, x.VehicleId, x.DriverId });
+            builder.Entity<VehicleDriver>()
+                .HasOne(x => x.Vehicle)
+                .WithMany(x => x.VehicleDrivers)
+                .HasForeignKey(x => x.VehicleId);
             builder.Entity<VehicleDriver>()
                 .HasOne(x => x.Driver)
-                .WithOne(x => x.VehicleDriver);
+                .WithMany()
+                .HasForeignKey(x => x.DriverId);
 
 
-            builder.Entity<VehicleLocation>()
-                .HasKey(x => x.LocationId);
-            builder.Entity<VehicleLocation>()
-                .HasOne(location => location.Vehicle)
-                .WithMany();
+            builder.Entity<ApplicationUser>()
+                .HasOne(x => x.VehicleDriver)
+                .WithOne(x => x.Driver)
+                .HasForeignKey<VehicleDriver>(x => x.DriverId);
         }
 
         public async Task<bool> SaveAsync()

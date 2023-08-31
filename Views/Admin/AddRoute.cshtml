@@ -1,17 +1,24 @@
-﻿
+﻿@using rina.Models.Admin
+@model RouteModel
 
 <script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-draw/v1.0.9/mapbox-gl-draw.js'></script>
 <link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-draw/v1.0.9/mapbox-gl-draw.css' type='text/css' />
 
+
 <div id="map"></div>
 
-<div class="info-box">
+<div class="AddRoute">
+    <button type="submit" class="btn" style="position: relative; margin: 5vh;">Add Route</button>
+</div>
+
+
+@*<div class="info-box">
   <p>
     Draw your route using the draw tools on the right. To get the most
     accurate route match, draw points at regular intervals.
   </p>
   <div id="directions"></div>
-</div>
+</div>*@
 
 <script>
     // Add your Mapbox access token

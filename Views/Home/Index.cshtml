@@ -83,25 +83,25 @@
             </select>
         </fieldset>
     </div>
+}
 
+@if (User.IsInRole("User"))
+{
+    @*<div class="left-container">
+        <input type="text" placeholder="enter starting point">
+        <input type="text" placeholder="enter destination">
+    </div>*@
     <script>
         // Display navigation directions
         map.addControl(
             new MapboxDirections({
                 accessToken: mapboxgl.accessToken,
                 controls: {
-                    profileSwitcher: false
+                    profileSwitcher: false,
+                    instructions: false
                 }
             }),
             'top-left'
         );
     </script>
-}
-
-@if (User.IsInRole("User"))
-{
-    <div class="left-container">
-        <input type="text" placeholder="enter starting point">
-        <input type="text" placeholder="enter destination">
-    </div>
 }
