@@ -12,7 +12,7 @@ using rina.Data;
 namespace rina.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230902081243_VehicleEntities")]
+    [Migration("20230902094348_VehicleEntities")]
     partial class VehicleEntities
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -53,22 +53,22 @@ namespace rina.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "59769cbf-408b-44dd-b7d0-cca2ed6b23e6",
-                            ConcurrencyStamp = "59769cbf-408b-44dd-b7d0-cca2ed6b23e6",
+                            Id = "e5637c04-ac5f-48db-9cae-aa0307d5f06a",
+                            ConcurrencyStamp = "e5637c04-ac5f-48db-9cae-aa0307d5f06a",
                             Name = "User",
                             NormalizedName = "USER"
                         },
                         new
                         {
-                            Id = "75849602-3bb2-478b-abdf-a3a049477e9b",
-                            ConcurrencyStamp = "75849602-3bb2-478b-abdf-a3a049477e9b",
+                            Id = "a4cef116-92a3-488d-a90d-fc137dbb2f02",
+                            ConcurrencyStamp = "a4cef116-92a3-488d-a90d-fc137dbb2f02",
                             Name = "Driver",
                             NormalizedName = "DRIVER"
                         },
                         new
                         {
-                            Id = "0ca8ff32-bf41-412a-8e29-dfe3418f7e44",
-                            ConcurrencyStamp = "0ca8ff32-bf41-412a-8e29-dfe3418f7e44",
+                            Id = "bbb08b87-9cd1-42f0-a741-dc7c2b9ce700",
+                            ConcurrencyStamp = "bbb08b87-9cd1-42f0-a741-dc7c2b9ce700",
                             Name = "Administrator",
                             NormalizedName = "ADMIN"
                         });
@@ -165,18 +165,18 @@ namespace rina.Data.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = "3caa1258-5785-4303-a61b-1ba9eb0aaeff",
-                            RoleId = "0ca8ff32-bf41-412a-8e29-dfe3418f7e44"
+                            UserId = "31c23363-a2d1-4978-97ce-580ee41b0333",
+                            RoleId = "bbb08b87-9cd1-42f0-a741-dc7c2b9ce700"
                         },
                         new
                         {
-                            UserId = "dbb3db27-c571-4195-8357-5a46bb035705",
-                            RoleId = "75849602-3bb2-478b-abdf-a3a049477e9b"
+                            UserId = "a4677616-f8e2-4794-a6a1-c8996bbeee49",
+                            RoleId = "a4cef116-92a3-488d-a90d-fc137dbb2f02"
                         },
                         new
                         {
-                            UserId = "49d8fc0c-e911-49d0-a867-39a168c0b905",
-                            RoleId = "59769cbf-408b-44dd-b7d0-cca2ed6b23e6"
+                            UserId = "5fb6e145-9ae9-49b7-8f05-bb3a77d4fdcb",
+                            RoleId = "e5637c04-ac5f-48db-9cae-aa0307d5f06a"
                         });
                 });
 
@@ -268,46 +268,46 @@ namespace rina.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "3caa1258-5785-4303-a61b-1ba9eb0aaeff",
+                            Id = "31c23363-a2d1-4978-97ce-580ee41b0333",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "f6cec787-3185-4096-9d18-6ede38ffdacb",
+                            ConcurrencyStamp = "8b2f35f8-11c8-4472-850f-9e6e2be79beb",
                             Email = "admin@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEBa6wLhLdyaJZU+rfgiXU5d1URgZqIl8nUmpVhInOkwrzUcAf5+ULJQn4OeDxy+OHA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEHUMm4OCQ5R7y+4aASxD6AgTg0JYfDM/ol84Y2BJKpR5fcTLekNcgDwOaJjDrU3H7Q==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "2dc07668-7160-40e5-80a5-dec37342ea98",
+                            SecurityStamp = "4914c695-a70d-4a36-be39-319fa3b8fe1e",
                             TwoFactorEnabled = false,
                             UserName = "admin"
                         },
                         new
                         {
-                            Id = "dbb3db27-c571-4195-8357-5a46bb035705",
+                            Id = "a4677616-f8e2-4794-a6a1-c8996bbeee49",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "0da54a49-c828-491e-abad-e8ebee40ef58",
+                            ConcurrencyStamp = "1d2647b1-1505-444e-8fcc-aba538493dbc",
                             Email = "driver@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedUserName = "DRIVER",
-                            PasswordHash = "AQAAAAEAACcQAAAAEMfEh4TkiBgt0nLl9d3tF2P5crc6eA1BSqfgqUEi1wWaSsdNYsvZrIQaXkAoNtzL1A==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEL16xQop26QANPMKHcMC/EdB/U+9UP61MN7NRFMGOjHX3aX+UWy/wtX4EVKymfI3lg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "33dde459-f773-4d08-8731-dcfdd10cac85",
+                            SecurityStamp = "3b020962-62dc-451b-b590-a0ff2c8167d6",
                             TwoFactorEnabled = false,
                             UserName = "driver"
                         },
                         new
                         {
-                            Id = "49d8fc0c-e911-49d0-a867-39a168c0b905",
+                            Id = "5fb6e145-9ae9-49b7-8f05-bb3a77d4fdcb",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "3118efe8-bee7-41ad-9e8d-260054369121",
+                            ConcurrencyStamp = "8a5b4014-3cb8-4d68-a5ad-c29d4248be66",
                             Email = "andreea@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedUserName = "ANDREEA",
-                            PasswordHash = "AQAAAAEAACcQAAAAEJrvhpYsMpCJ95Sjowt+l8b0r8AcmqwYmw8LYn6iWzNCIyjXL5A5L4T7IypstU1sSg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAECQbpVxX2PoBgYY5cMTLNJnevvfy5OttEKlzODLb9w85H877//KcVxh4gfjfZpBfTQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "3d47635a-fd1d-4b67-8a52-f146863d8029",
+                            SecurityStamp = "b92b0ba9-6385-47b5-a041-be7c47007dc4",
                             TwoFactorEnabled = false,
                             UserName = "andreea"
                         });
@@ -335,9 +335,11 @@ namespace rina.Data.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<decimal>("Latitude")
+                        .HasPrecision(18, 2)
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<decimal>("Longitude")
+                        .HasPrecision(18, 2)
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("Name")
@@ -361,9 +363,11 @@ namespace rina.Data.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<decimal>("Latitude")
+                        .HasPrecision(18, 2)
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<decimal>("Longitude")
+                        .HasPrecision(18, 2)
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("Name")

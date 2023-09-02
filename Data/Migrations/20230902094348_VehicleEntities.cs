@@ -60,8 +60,8 @@ namespace rina.Data.Migrations
                     VehicleId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Type = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Latitude = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    Longitude = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
+                    Latitude = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: false),
+                    Longitude = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -117,8 +117,8 @@ namespace rina.Data.Migrations
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Latitude = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    Longitude = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Latitude = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: false),
+                    Longitude = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: false),
                     RouteId = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>
@@ -137,9 +137,9 @@ namespace rina.Data.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "0ca8ff32-bf41-412a-8e29-dfe3418f7e44", "0ca8ff32-bf41-412a-8e29-dfe3418f7e44", "Administrator", "ADMIN" },
-                    { "59769cbf-408b-44dd-b7d0-cca2ed6b23e6", "59769cbf-408b-44dd-b7d0-cca2ed6b23e6", "User", "USER" },
-                    { "75849602-3bb2-478b-abdf-a3a049477e9b", "75849602-3bb2-478b-abdf-a3a049477e9b", "Driver", "DRIVER" }
+                    { "a4cef116-92a3-488d-a90d-fc137dbb2f02", "a4cef116-92a3-488d-a90d-fc137dbb2f02", "Driver", "DRIVER" },
+                    { "bbb08b87-9cd1-42f0-a741-dc7c2b9ce700", "bbb08b87-9cd1-42f0-a741-dc7c2b9ce700", "Administrator", "ADMIN" },
+                    { "e5637c04-ac5f-48db-9cae-aa0307d5f06a", "e5637c04-ac5f-48db-9cae-aa0307d5f06a", "User", "USER" }
                 });
 
             migrationBuilder.InsertData(
@@ -147,25 +147,25 @@ namespace rina.Data.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "3caa1258-5785-4303-a61b-1ba9eb0aaeff", 0, "f6cec787-3185-4096-9d18-6ede38ffdacb", "admin@gmail.com", true, false, null, null, "ADMIN", "AQAAAAEAACcQAAAAEBa6wLhLdyaJZU+rfgiXU5d1URgZqIl8nUmpVhInOkwrzUcAf5+ULJQn4OeDxy+OHA==", null, false, "2dc07668-7160-40e5-80a5-dec37342ea98", false, "admin" },
-                    { "49d8fc0c-e911-49d0-a867-39a168c0b905", 0, "3118efe8-bee7-41ad-9e8d-260054369121", "andreea@gmail.com", true, false, null, null, "ANDREEA", "AQAAAAEAACcQAAAAEJrvhpYsMpCJ95Sjowt+l8b0r8AcmqwYmw8LYn6iWzNCIyjXL5A5L4T7IypstU1sSg==", null, false, "3d47635a-fd1d-4b67-8a52-f146863d8029", false, "andreea" },
-                    { "dbb3db27-c571-4195-8357-5a46bb035705", 0, "0da54a49-c828-491e-abad-e8ebee40ef58", "driver@gmail.com", true, false, null, null, "DRIVER", "AQAAAAEAACcQAAAAEMfEh4TkiBgt0nLl9d3tF2P5crc6eA1BSqfgqUEi1wWaSsdNYsvZrIQaXkAoNtzL1A==", null, false, "33dde459-f773-4d08-8731-dcfdd10cac85", false, "driver" }
+                    { "31c23363-a2d1-4978-97ce-580ee41b0333", 0, "8b2f35f8-11c8-4472-850f-9e6e2be79beb", "admin@gmail.com", true, false, null, null, "ADMIN", "AQAAAAEAACcQAAAAEHUMm4OCQ5R7y+4aASxD6AgTg0JYfDM/ol84Y2BJKpR5fcTLekNcgDwOaJjDrU3H7Q==", null, false, "4914c695-a70d-4a36-be39-319fa3b8fe1e", false, "admin" },
+                    { "5fb6e145-9ae9-49b7-8f05-bb3a77d4fdcb", 0, "8a5b4014-3cb8-4d68-a5ad-c29d4248be66", "andreea@gmail.com", true, false, null, null, "ANDREEA", "AQAAAAEAACcQAAAAECQbpVxX2PoBgYY5cMTLNJnevvfy5OttEKlzODLb9w85H877//KcVxh4gfjfZpBfTQ==", null, false, "b92b0ba9-6385-47b5-a041-be7c47007dc4", false, "andreea" },
+                    { "a4677616-f8e2-4794-a6a1-c8996bbeee49", 0, "1d2647b1-1505-444e-8fcc-aba538493dbc", "driver@gmail.com", true, false, null, null, "DRIVER", "AQAAAAEAACcQAAAAEL16xQop26QANPMKHcMC/EdB/U+9UP61MN7NRFMGOjHX3aX+UWy/wtX4EVKymfI3lg==", null, false, "3b020962-62dc-451b-b590-a0ff2c8167d6", false, "driver" }
                 });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
                 columns: new[] { "RoleId", "UserId" },
-                values: new object[] { "0ca8ff32-bf41-412a-8e29-dfe3418f7e44", "3caa1258-5785-4303-a61b-1ba9eb0aaeff" });
+                values: new object[] { "bbb08b87-9cd1-42f0-a741-dc7c2b9ce700", "31c23363-a2d1-4978-97ce-580ee41b0333" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
                 columns: new[] { "RoleId", "UserId" },
-                values: new object[] { "59769cbf-408b-44dd-b7d0-cca2ed6b23e6", "49d8fc0c-e911-49d0-a867-39a168c0b905" });
+                values: new object[] { "e5637c04-ac5f-48db-9cae-aa0307d5f06a", "5fb6e145-9ae9-49b7-8f05-bb3a77d4fdcb" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
                 columns: new[] { "RoleId", "UserId" },
-                values: new object[] { "75849602-3bb2-478b-abdf-a3a049477e9b", "dbb3db27-c571-4195-8357-5a46bb035705" });
+                values: new object[] { "a4cef116-92a3-488d-a90d-fc137dbb2f02", "a4677616-f8e2-4794-a6a1-c8996bbeee49" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Route_VehicleId",
@@ -207,47 +207,47 @@ namespace rina.Data.Migrations
             migrationBuilder.DeleteData(
                 table: "AspNetUserRoles",
                 keyColumns: new[] { "RoleId", "UserId" },
-                keyValues: new object[] { "0ca8ff32-bf41-412a-8e29-dfe3418f7e44", "3caa1258-5785-4303-a61b-1ba9eb0aaeff" });
+                keyValues: new object[] { "bbb08b87-9cd1-42f0-a741-dc7c2b9ce700", "31c23363-a2d1-4978-97ce-580ee41b0333" });
 
             migrationBuilder.DeleteData(
                 table: "AspNetUserRoles",
                 keyColumns: new[] { "RoleId", "UserId" },
-                keyValues: new object[] { "59769cbf-408b-44dd-b7d0-cca2ed6b23e6", "49d8fc0c-e911-49d0-a867-39a168c0b905" });
+                keyValues: new object[] { "e5637c04-ac5f-48db-9cae-aa0307d5f06a", "5fb6e145-9ae9-49b7-8f05-bb3a77d4fdcb" });
 
             migrationBuilder.DeleteData(
                 table: "AspNetUserRoles",
                 keyColumns: new[] { "RoleId", "UserId" },
-                keyValues: new object[] { "75849602-3bb2-478b-abdf-a3a049477e9b", "dbb3db27-c571-4195-8357-5a46bb035705" });
+                keyValues: new object[] { "a4cef116-92a3-488d-a90d-fc137dbb2f02", "a4677616-f8e2-4794-a6a1-c8996bbeee49" });
 
             migrationBuilder.DeleteData(
                 table: "AspNetRoles",
                 keyColumn: "Id",
-                keyValue: "0ca8ff32-bf41-412a-8e29-dfe3418f7e44");
+                keyValue: "a4cef116-92a3-488d-a90d-fc137dbb2f02");
 
             migrationBuilder.DeleteData(
                 table: "AspNetRoles",
                 keyColumn: "Id",
-                keyValue: "59769cbf-408b-44dd-b7d0-cca2ed6b23e6");
+                keyValue: "bbb08b87-9cd1-42f0-a741-dc7c2b9ce700");
 
             migrationBuilder.DeleteData(
                 table: "AspNetRoles",
                 keyColumn: "Id",
-                keyValue: "75849602-3bb2-478b-abdf-a3a049477e9b");
+                keyValue: "e5637c04-ac5f-48db-9cae-aa0307d5f06a");
 
             migrationBuilder.DeleteData(
                 table: "AspNetUsers",
                 keyColumn: "Id",
-                keyValue: "3caa1258-5785-4303-a61b-1ba9eb0aaeff");
+                keyValue: "31c23363-a2d1-4978-97ce-580ee41b0333");
 
             migrationBuilder.DeleteData(
                 table: "AspNetUsers",
                 keyColumn: "Id",
-                keyValue: "49d8fc0c-e911-49d0-a867-39a168c0b905");
+                keyValue: "5fb6e145-9ae9-49b7-8f05-bb3a77d4fdcb");
 
             migrationBuilder.DeleteData(
                 table: "AspNetUsers",
                 keyColumn: "Id",
-                keyValue: "dbb3db27-c571-4195-8357-5a46bb035705");
+                keyValue: "a4677616-f8e2-4794-a6a1-c8996bbeee49");
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",

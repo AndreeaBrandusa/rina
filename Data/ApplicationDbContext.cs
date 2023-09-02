@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using rina.Entities;
+using rina.Utils;
 
 namespace rina.Data
 {
@@ -198,8 +199,8 @@ namespace rina.Data
                 {
                     Id = Guid.NewGuid().ToString(),
                     Name = stationName,
-                    Latitude = stationsData[stationName].Item1,
-                    Longitude = stationsData[stationName].Item2,
+                    Latitude = DecimalConverter.ConvertForDatabase(stationsData[stationName].Item1),
+                    Longitude = DecimalConverter.ConvertForDatabase(stationsData[stationName].Item2),
                     RouteId = routeId
                 });
             });
@@ -213,8 +214,8 @@ namespace rina.Data
                 {
                     Id = Guid.NewGuid().ToString(),
                     Name = stationName,
-                    Latitude = stationsData[stationName].Item1,
-                    Longitude = stationsData[stationName].Item2,
+                    Latitude = DecimalConverter.ConvertForDatabase(stationsData[stationName].Item1),
+                    Longitude = DecimalConverter.ConvertForDatabase(stationsData[stationName].Item2),
                     RouteId = reversedRouteId
                 });
             });
@@ -236,6 +237,12 @@ namespace rina.Data
                 .HasOne(x => x.Route)
                 .WithMany(x => x.Stations)
                 .HasForeignKey(x => x.RouteId);
+            builder.Entity<Station>()
+                .Property(x => x.Latitude)
+                .HasPrecision(18, 2);
+            builder.Entity<Station>()
+                .Property(x => x.Longitude)
+                .HasPrecision(18, 2);
 
 
             builder.Entity<Vehicle>()
@@ -244,6 +251,12 @@ namespace rina.Data
                 .HasOne(x => x.VehicleDriver)
                 .WithOne(x => x.Vehicle)
                 .HasForeignKey<VehicleDriver>(x => x.VehicleId);
+            builder.Entity<Vehicle>()
+                .Property(x => x.Latitude)
+                .HasPrecision(18, 2);
+            builder.Entity<Vehicle>()
+                .Property(x => x.Longitude)
+                .HasPrecision(18, 2);
 
             builder.Entity<VehicleDriver>()
                 .HasKey(x => x.Id);

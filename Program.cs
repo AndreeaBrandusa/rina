@@ -29,6 +29,9 @@ builder.Services.AddAuthorization(options =>
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddScoped<IdentityService>();
+builder.Services.AddScoped<IVehicleService, VehicleService>();
+builder.Services.AddScoped<IStationService, StationService>();
+builder.Services.AddScoped<IRouteService, RouteService>();
 
 var app = builder.Build();
 

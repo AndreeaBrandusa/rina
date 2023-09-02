@@ -1,4 +1,4 @@
-﻿@using rina.Models.Admin
+﻿@using rina.Models.Route
 @model RouteModel
 
 <script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-draw/v1.0.9/mapbox-gl-draw.js'></script>
@@ -7,8 +7,14 @@
 
 <div id="map"></div>
 
-<div class="AddRoute">
-    <button type="submit" class="btn" style="position: relative; margin: 5vh;">Add Route</button>
+<div class="left-container" style="position: relative;">
+    <form asp-action="AddRoute" id="AddRoute">
+        <h3 style="text-align: center; margin-bottom: 5vh; color: white; font-size: 1.1rem;">ADD STATION</h3>
+
+        <input asp-for="Stations" type="text" placeholder="station name">
+
+        <button type="submit" class="btn" style="position: relative; margin: 5vh 0 0 0;">Add Route</button>
+    </form>
 </div>
 
 

@@ -1,8 +1,8 @@
 ﻿
-
 - fix page for adding new 
 		-vehicles
 		-stations(select location on map)
+		-routes
 - fix index page for adding destination and showing on map
 
 - bus simulator

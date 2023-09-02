@@ -1,0 +1,37 @@
+﻿@using rina.Models.Vehicle
+@using rina.Models.Route
+@model VehicleModel
+
+<div class="formContainer">
+    <form asp-action="AddVehicle" id="AddVehicleForm">
+        <h3>ADD VEHICLE</h3>
+        <input asp-for="Name" type="text" placeholder="vehicle name">
+        <input asp-for="Type" type="text" placeholder="vehicle type">
+      
+        <fieldset id="stations" class="p-2" 
+            style="border: 1px solid #ad5049; margin-top: 10px; /*display: flex; justify-content: space-between;*/ align-items: center;">
+            <legend class="float-none w-auto px-3" style="text-align: left; font-size: 1.1rem; color: #91403a;">
+                Select stations
+            </legend>
+
+            <select @*asp-for="Routes" asp-items="@Model.Routes"*@>
+                name="station" id="select" autocomplete="off" required 
+                style="width: 100%; padding: 5px 0 5px 0; color: gray; height: 5vh; margin: 0 2vh 2vh 0; display: block;">
+                <option>route 1</option>
+            </select>
+
+            <select @*asp-for="Routes"*@ name="station" id="select" autocomplete="off" required 
+                style="width: 100%; padding: 5px 0 5px 0; color: gray; height: 5vh; margin: 0 2vh 2vh 0; display: block;">
+                <option>route 1</option>
+            </select>
+
+
+            @*<button asp-action="AddNextStation" type="submit" class="btn" 
+                style="font-size:1rem; color: white; background-color: #bf5d56; padding: 0 5px;">
+                +
+            </button>*@
+        </fieldset>
+
+        <button type="submit" class="btn">ADD VEHICLE</button>
+    </form>
+</div>
