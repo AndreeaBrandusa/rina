@@ -4,7 +4,7 @@
 
 namespace rina.Data.Migrations
 {
-    public partial class Vehicle : Migration
+    public partial class VehicleEntities : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -54,20 +54,6 @@ namespace rina.Data.Migrations
                 keyValue: "f4cf2901-eba8-47bb-86c1-f4cfafff82f4");
 
             migrationBuilder.CreateTable(
-                name: "Station",
-                columns: table => new
-                {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Latitude = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    Longitude = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Station", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Vehicle",
                 columns: table => new
                 {
@@ -105,12 +91,12 @@ namespace rina.Data.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    VehicleId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    DriverId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                    DriverId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    VehicleId = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_VehicleDriver", x => new { x.Id, x.VehicleId, x.DriverId });
+                    table.PrimaryKey("PK_VehicleDriver", x => x.Id);
                     table.ForeignKey(
                         name: "FK_VehicleDriver_AspNetUsers_DriverId",
                         column: x => x.DriverId,
@@ -126,26 +112,23 @@ namespace rina.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "RouteStation",
+                name: "Station",
                 columns: table => new
                 {
-                    RoutesRouteId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    StationsId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Latitude = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Longitude = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    RouteId = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_RouteStation", x => new { x.RoutesRouteId, x.StationsId });
+                    table.PrimaryKey("PK_Station", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_RouteStation_Route_RoutesRouteId",
-                        column: x => x.RoutesRouteId,
+                        name: "FK_Station_Route_RouteId",
+                        column: x => x.RouteId,
                         principalTable: "Route",
                         principalColumn: "RouteId",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_RouteStation_Station_StationsId",
-                        column: x => x.StationsId,
-                        principalTable: "Station",
-                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -154,9 +137,9 @@ namespace rina.Data.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "1ab2a52d-862b-44e5-8d9e-b0a0f386c1b0", "1ab2a52d-862b-44e5-8d9e-b0a0f386c1b0", "Driver", "DRIVER" },
-                    { "7670aa0b-db3f-464f-a45b-92a7ddbb1414", "7670aa0b-db3f-464f-a45b-92a7ddbb1414", "User", "USER" },
-                    { "c6bb5d70-d8c7-44d2-9421-d8a724551784", "c6bb5d70-d8c7-44d2-9421-d8a724551784", "Administrator", "ADMIN" }
+                    { "0ca8ff32-bf41-412a-8e29-dfe3418f7e44", "0ca8ff32-bf41-412a-8e29-dfe3418f7e44", "Administrator", "ADMIN" },
+                    { "59769cbf-408b-44dd-b7d0-cca2ed6b23e6", "59769cbf-408b-44dd-b7d0-cca2ed6b23e6", "User", "USER" },
+                    { "75849602-3bb2-478b-abdf-a3a049477e9b", "75849602-3bb2-478b-abdf-a3a049477e9b", "Driver", "DRIVER" }
                 });
 
             migrationBuilder.InsertData(
@@ -164,25 +147,25 @@ namespace rina.Data.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "720d842e-c2ac-4caa-b04c-5ae7a2152c2d", 0, "71e355cd-1fb9-4bf3-b336-35de088d77b2", "andreea@gmail.com", true, false, null, null, "ANDREEA", "AQAAAAEAACcQAAAAEDDLX14Ne5+mpMiLeSk4poKB0WtosUTtJREh1WxcyREUOE40ZuY/4G6TLyw+3ihamQ==", null, false, "91db6715-77a0-40f6-a1c9-3205178a1f8a", false, "andreea" },
-                    { "9edbe3b7-570a-41db-bbf5-aaa0de5ba102", 0, "83cd8f41-9b92-442d-b57c-7283ebe833ca", "admin@gmail.com", true, false, null, null, "ADMIN", "AQAAAAEAACcQAAAAEFXrUT/tBnoMUdUEXMlyoIhTDTiWEZeWeXtSVViSbNqYKQcbyttKP2s24Xdm69NpLg==", null, false, "17e57c62-c87d-4527-8a8c-ade0b9fef13e", false, "admin" },
-                    { "d49b532f-18d2-4584-a5c5-bc776b002cb1", 0, "8da550dd-aaa2-46a3-9e1b-9a33118869c6", "driver@gmail.com", true, false, null, null, "DRIVER", "AQAAAAEAACcQAAAAEHC4enquade4O6IhWULFJgv5djjxPED6waeuNTVkyThDcQxbnMcYOJBlb2L/3PUhsQ==", null, false, "f26b0c92-05cf-4083-b4e5-a438014bebec", false, "driver" }
+                    { "3caa1258-5785-4303-a61b-1ba9eb0aaeff", 0, "f6cec787-3185-4096-9d18-6ede38ffdacb", "admin@gmail.com", true, false, null, null, "ADMIN", "AQAAAAEAACcQAAAAEBa6wLhLdyaJZU+rfgiXU5d1URgZqIl8nUmpVhInOkwrzUcAf5+ULJQn4OeDxy+OHA==", null, false, "2dc07668-7160-40e5-80a5-dec37342ea98", false, "admin" },
+                    { "49d8fc0c-e911-49d0-a867-39a168c0b905", 0, "3118efe8-bee7-41ad-9e8d-260054369121", "andreea@gmail.com", true, false, null, null, "ANDREEA", "AQAAAAEAACcQAAAAEJrvhpYsMpCJ95Sjowt+l8b0r8AcmqwYmw8LYn6iWzNCIyjXL5A5L4T7IypstU1sSg==", null, false, "3d47635a-fd1d-4b67-8a52-f146863d8029", false, "andreea" },
+                    { "dbb3db27-c571-4195-8357-5a46bb035705", 0, "0da54a49-c828-491e-abad-e8ebee40ef58", "driver@gmail.com", true, false, null, null, "DRIVER", "AQAAAAEAACcQAAAAEMfEh4TkiBgt0nLl9d3tF2P5crc6eA1BSqfgqUEi1wWaSsdNYsvZrIQaXkAoNtzL1A==", null, false, "33dde459-f773-4d08-8731-dcfdd10cac85", false, "driver" }
                 });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
                 columns: new[] { "RoleId", "UserId" },
-                values: new object[] { "7670aa0b-db3f-464f-a45b-92a7ddbb1414", "720d842e-c2ac-4caa-b04c-5ae7a2152c2d" });
+                values: new object[] { "0ca8ff32-bf41-412a-8e29-dfe3418f7e44", "3caa1258-5785-4303-a61b-1ba9eb0aaeff" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
                 columns: new[] { "RoleId", "UserId" },
-                values: new object[] { "c6bb5d70-d8c7-44d2-9421-d8a724551784", "9edbe3b7-570a-41db-bbf5-aaa0de5ba102" });
+                values: new object[] { "59769cbf-408b-44dd-b7d0-cca2ed6b23e6", "49d8fc0c-e911-49d0-a867-39a168c0b905" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
                 columns: new[] { "RoleId", "UserId" },
-                values: new object[] { "1ab2a52d-862b-44e5-8d9e-b0a0f386c1b0", "d49b532f-18d2-4584-a5c5-bc776b002cb1" });
+                values: new object[] { "75849602-3bb2-478b-abdf-a3a049477e9b", "dbb3db27-c571-4195-8357-5a46bb035705" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Route_VehicleId",
@@ -190,9 +173,9 @@ namespace rina.Data.Migrations
                 column: "VehicleId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_RouteStation_StationsId",
-                table: "RouteStation",
-                column: "StationsId");
+                name: "IX_Station_RouteId",
+                table: "Station",
+                column: "RouteId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_VehicleDriver_DriverId",
@@ -203,13 +186,14 @@ namespace rina.Data.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_VehicleDriver_VehicleId",
                 table: "VehicleDriver",
-                column: "VehicleId");
+                column: "VehicleId",
+                unique: true);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "RouteStation");
+                name: "Station");
 
             migrationBuilder.DropTable(
                 name: "VehicleDriver");
@@ -218,55 +202,52 @@ namespace rina.Data.Migrations
                 name: "Route");
 
             migrationBuilder.DropTable(
-                name: "Station");
-
-            migrationBuilder.DropTable(
                 name: "Vehicle");
 
             migrationBuilder.DeleteData(
                 table: "AspNetUserRoles",
                 keyColumns: new[] { "RoleId", "UserId" },
-                keyValues: new object[] { "7670aa0b-db3f-464f-a45b-92a7ddbb1414", "720d842e-c2ac-4caa-b04c-5ae7a2152c2d" });
+                keyValues: new object[] { "0ca8ff32-bf41-412a-8e29-dfe3418f7e44", "3caa1258-5785-4303-a61b-1ba9eb0aaeff" });
 
             migrationBuilder.DeleteData(
                 table: "AspNetUserRoles",
                 keyColumns: new[] { "RoleId", "UserId" },
-                keyValues: new object[] { "c6bb5d70-d8c7-44d2-9421-d8a724551784", "9edbe3b7-570a-41db-bbf5-aaa0de5ba102" });
+                keyValues: new object[] { "59769cbf-408b-44dd-b7d0-cca2ed6b23e6", "49d8fc0c-e911-49d0-a867-39a168c0b905" });
 
             migrationBuilder.DeleteData(
                 table: "AspNetUserRoles",
                 keyColumns: new[] { "RoleId", "UserId" },
-                keyValues: new object[] { "1ab2a52d-862b-44e5-8d9e-b0a0f386c1b0", "d49b532f-18d2-4584-a5c5-bc776b002cb1" });
+                keyValues: new object[] { "75849602-3bb2-478b-abdf-a3a049477e9b", "dbb3db27-c571-4195-8357-5a46bb035705" });
 
             migrationBuilder.DeleteData(
                 table: "AspNetRoles",
                 keyColumn: "Id",
-                keyValue: "1ab2a52d-862b-44e5-8d9e-b0a0f386c1b0");
+                keyValue: "0ca8ff32-bf41-412a-8e29-dfe3418f7e44");
 
             migrationBuilder.DeleteData(
                 table: "AspNetRoles",
                 keyColumn: "Id",
-                keyValue: "7670aa0b-db3f-464f-a45b-92a7ddbb1414");
+                keyValue: "59769cbf-408b-44dd-b7d0-cca2ed6b23e6");
 
             migrationBuilder.DeleteData(
                 table: "AspNetRoles",
                 keyColumn: "Id",
-                keyValue: "c6bb5d70-d8c7-44d2-9421-d8a724551784");
+                keyValue: "75849602-3bb2-478b-abdf-a3a049477e9b");
 
             migrationBuilder.DeleteData(
                 table: "AspNetUsers",
                 keyColumn: "Id",
-                keyValue: "720d842e-c2ac-4caa-b04c-5ae7a2152c2d");
+                keyValue: "3caa1258-5785-4303-a61b-1ba9eb0aaeff");
 
             migrationBuilder.DeleteData(
                 table: "AspNetUsers",
                 keyColumn: "Id",
-                keyValue: "9edbe3b7-570a-41db-bbf5-aaa0de5ba102");
+                keyValue: "49d8fc0c-e911-49d0-a867-39a168c0b905");
 
             migrationBuilder.DeleteData(
                 table: "AspNetUsers",
                 keyColumn: "Id",
-                keyValue: "d49b532f-18d2-4584-a5c5-bc776b002cb1");
+                keyValue: "dbb3db27-c571-4195-8357-5a46bb035705");
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",

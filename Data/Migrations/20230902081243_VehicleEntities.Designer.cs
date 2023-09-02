@@ -12,8 +12,8 @@ using rina.Data;
 namespace rina.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230831182353_Vehicle")]
-    partial class Vehicle
+    [Migration("20230902081243_VehicleEntities")]
+    partial class VehicleEntities
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -53,22 +53,22 @@ namespace rina.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "7670aa0b-db3f-464f-a45b-92a7ddbb1414",
-                            ConcurrencyStamp = "7670aa0b-db3f-464f-a45b-92a7ddbb1414",
+                            Id = "59769cbf-408b-44dd-b7d0-cca2ed6b23e6",
+                            ConcurrencyStamp = "59769cbf-408b-44dd-b7d0-cca2ed6b23e6",
                             Name = "User",
                             NormalizedName = "USER"
                         },
                         new
                         {
-                            Id = "1ab2a52d-862b-44e5-8d9e-b0a0f386c1b0",
-                            ConcurrencyStamp = "1ab2a52d-862b-44e5-8d9e-b0a0f386c1b0",
+                            Id = "75849602-3bb2-478b-abdf-a3a049477e9b",
+                            ConcurrencyStamp = "75849602-3bb2-478b-abdf-a3a049477e9b",
                             Name = "Driver",
                             NormalizedName = "DRIVER"
                         },
                         new
                         {
-                            Id = "c6bb5d70-d8c7-44d2-9421-d8a724551784",
-                            ConcurrencyStamp = "c6bb5d70-d8c7-44d2-9421-d8a724551784",
+                            Id = "0ca8ff32-bf41-412a-8e29-dfe3418f7e44",
+                            ConcurrencyStamp = "0ca8ff32-bf41-412a-8e29-dfe3418f7e44",
                             Name = "Administrator",
                             NormalizedName = "ADMIN"
                         });
@@ -165,18 +165,18 @@ namespace rina.Data.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = "9edbe3b7-570a-41db-bbf5-aaa0de5ba102",
-                            RoleId = "c6bb5d70-d8c7-44d2-9421-d8a724551784"
+                            UserId = "3caa1258-5785-4303-a61b-1ba9eb0aaeff",
+                            RoleId = "0ca8ff32-bf41-412a-8e29-dfe3418f7e44"
                         },
                         new
                         {
-                            UserId = "d49b532f-18d2-4584-a5c5-bc776b002cb1",
-                            RoleId = "1ab2a52d-862b-44e5-8d9e-b0a0f386c1b0"
+                            UserId = "dbb3db27-c571-4195-8357-5a46bb035705",
+                            RoleId = "75849602-3bb2-478b-abdf-a3a049477e9b"
                         },
                         new
                         {
-                            UserId = "720d842e-c2ac-4caa-b04c-5ae7a2152c2d",
-                            RoleId = "7670aa0b-db3f-464f-a45b-92a7ddbb1414"
+                            UserId = "49d8fc0c-e911-49d0-a867-39a168c0b905",
+                            RoleId = "59769cbf-408b-44dd-b7d0-cca2ed6b23e6"
                         });
                 });
 
@@ -268,46 +268,46 @@ namespace rina.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "9edbe3b7-570a-41db-bbf5-aaa0de5ba102",
+                            Id = "3caa1258-5785-4303-a61b-1ba9eb0aaeff",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "83cd8f41-9b92-442d-b57c-7283ebe833ca",
+                            ConcurrencyStamp = "f6cec787-3185-4096-9d18-6ede38ffdacb",
                             Email = "admin@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEFXrUT/tBnoMUdUEXMlyoIhTDTiWEZeWeXtSVViSbNqYKQcbyttKP2s24Xdm69NpLg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEBa6wLhLdyaJZU+rfgiXU5d1URgZqIl8nUmpVhInOkwrzUcAf5+ULJQn4OeDxy+OHA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "17e57c62-c87d-4527-8a8c-ade0b9fef13e",
+                            SecurityStamp = "2dc07668-7160-40e5-80a5-dec37342ea98",
                             TwoFactorEnabled = false,
                             UserName = "admin"
                         },
                         new
                         {
-                            Id = "d49b532f-18d2-4584-a5c5-bc776b002cb1",
+                            Id = "dbb3db27-c571-4195-8357-5a46bb035705",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "8da550dd-aaa2-46a3-9e1b-9a33118869c6",
+                            ConcurrencyStamp = "0da54a49-c828-491e-abad-e8ebee40ef58",
                             Email = "driver@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedUserName = "DRIVER",
-                            PasswordHash = "AQAAAAEAACcQAAAAEHC4enquade4O6IhWULFJgv5djjxPED6waeuNTVkyThDcQxbnMcYOJBlb2L/3PUhsQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEMfEh4TkiBgt0nLl9d3tF2P5crc6eA1BSqfgqUEi1wWaSsdNYsvZrIQaXkAoNtzL1A==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "f26b0c92-05cf-4083-b4e5-a438014bebec",
+                            SecurityStamp = "33dde459-f773-4d08-8731-dcfdd10cac85",
                             TwoFactorEnabled = false,
                             UserName = "driver"
                         },
                         new
                         {
-                            Id = "720d842e-c2ac-4caa-b04c-5ae7a2152c2d",
+                            Id = "49d8fc0c-e911-49d0-a867-39a168c0b905",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "71e355cd-1fb9-4bf3-b336-35de088d77b2",
+                            ConcurrencyStamp = "3118efe8-bee7-41ad-9e8d-260054369121",
                             Email = "andreea@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedUserName = "ANDREEA",
-                            PasswordHash = "AQAAAAEAACcQAAAAEDDLX14Ne5+mpMiLeSk4poKB0WtosUTtJREh1WxcyREUOE40ZuY/4G6TLyw+3ihamQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEJrvhpYsMpCJ95Sjowt+l8b0r8AcmqwYmw8LYn6iWzNCIyjXL5A5L4T7IypstU1sSg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "91db6715-77a0-40f6-a1c9-3205178a1f8a",
+                            SecurityStamp = "3d47635a-fd1d-4b67-8a52-f146863d8029",
                             TwoFactorEnabled = false,
                             UserName = "andreea"
                         });
@@ -344,7 +344,13 @@ namespace rina.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("RouteId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("RouteId");
 
                     b.ToTable("Station");
                 });
@@ -378,35 +384,23 @@ namespace rina.Data.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("VehicleId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<string>("DriverId")
+                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
-                    b.HasKey("Id", "VehicleId", "DriverId");
+                    b.Property<string>("VehicleId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
 
                     b.HasIndex("DriverId")
                         .IsUnique();
 
-                    b.HasIndex("VehicleId");
+                    b.HasIndex("VehicleId")
+                        .IsUnique();
 
                     b.ToTable("VehicleDriver");
-                });
-
-            modelBuilder.Entity("RouteStation", b =>
-                {
-                    b.Property<string>("RoutesRouteId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("StationsId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("RoutesRouteId", "StationsId");
-
-                    b.HasIndex("StationsId");
-
-                    b.ToTable("RouteStation");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -471,6 +465,17 @@ namespace rina.Data.Migrations
                     b.Navigation("Vehicle");
                 });
 
+            modelBuilder.Entity("rina.Entities.Station", b =>
+                {
+                    b.HasOne("rina.Entities.Route", "Route")
+                        .WithMany("Stations")
+                        .HasForeignKey("RouteId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Route");
+                });
+
             modelBuilder.Entity("rina.Entities.VehicleDriver", b =>
                 {
                     b.HasOne("rina.Entities.ApplicationUser", "Driver")
@@ -480,8 +485,8 @@ namespace rina.Data.Migrations
                         .IsRequired();
 
                     b.HasOne("rina.Entities.Vehicle", "Vehicle")
-                        .WithMany("VehicleDrivers")
-                        .HasForeignKey("VehicleId")
+                        .WithOne("VehicleDriver")
+                        .HasForeignKey("rina.Entities.VehicleDriver", "VehicleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -490,32 +495,23 @@ namespace rina.Data.Migrations
                     b.Navigation("Vehicle");
                 });
 
-            modelBuilder.Entity("RouteStation", b =>
-                {
-                    b.HasOne("rina.Entities.Route", null)
-                        .WithMany()
-                        .HasForeignKey("RoutesRouteId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("rina.Entities.Station", null)
-                        .WithMany()
-                        .HasForeignKey("StationsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("rina.Entities.ApplicationUser", b =>
                 {
                     b.Navigation("VehicleDriver")
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("rina.Entities.Route", b =>
+                {
+                    b.Navigation("Stations");
+                });
+
             modelBuilder.Entity("rina.Entities.Vehicle", b =>
                 {
                     b.Navigation("Routes");
 
-                    b.Navigation("VehicleDrivers");
+                    b.Navigation("VehicleDriver")
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

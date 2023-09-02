@@ -78,9 +78,11 @@ namespace rina.Data
             #endregion Add Admin Account
 
             #region Add Driver Account
+
+            string driverId = Guid.NewGuid().ToString();
             var driverUser = new ApplicationUser
             {
-                Id = Guid.NewGuid().ToString(),
+                Id = driverId,
                 Email = "driver@gmail.com",
                 EmailConfirmed = true,
                 UserName = "driver",
@@ -128,6 +130,97 @@ namespace rina.Data
             #endregion Add User Account
 
 
+            #region Add Default Vehicle
+            string vehicleId = "2253d4b4-edba-4041-a314-22968193faf2";
+
+            builder.Entity<Vehicle>().HasData(new Vehicle
+            {
+                VehicleId = vehicleId,
+                Name = "6",
+                Type = "Tram",
+                Latitude = 0,
+                Longitude = 0
+            });
+            #endregion Add Default Vehicle
+
+            #region Add Default VehicleDriver
+            builder.Entity<VehicleDriver>().HasData(new VehicleDriver
+            {
+                Id = Guid.NewGuid().ToString(),
+                DriverId = driverId,
+                VehicleId = vehicleId
+            });
+            #endregion Add Default VehicleDriver
+
+            #region Add default Routes
+            string routeId = Guid.NewGuid().ToString();
+
+            builder.Entity<Entities.Route>().HasData(new Entities.Route
+            {
+                RouteId = routeId,
+                VehicleId = vehicleId
+            });
+
+            string reversedRouteId = Guid.NewGuid().ToString();
+            builder.Entity<Entities.Route>().HasData(new Entities.Route
+            {
+                RouteId = reversedRouteId,
+                VehicleId = vehicleId
+            });
+            #endregion Add default Routes
+
+            #region Add Default Stations
+            var stationsData = new Dictionary<string, (decimal, decimal)>
+            {
+                { "Piata Maria", (45.74827859010117m, 21.21917452835527m) },
+                { "Catedrala Metropolitana", (45.75109221785382m, 21.22361857206686m) },
+                { "Spitalul de copii", (45.75490769991527m, 21.221050800524303m) },
+                { "Brediceanu", (45.75619701680361m, 21.221307553237732m) },
+                { "Piata Timisoara 700", (45.75625163350785m, 21.222908892035374m) },
+                { "Piata Libertatii", (45.75587250460832m, 21.2276939799686m) },
+                { "Hotel Continental", (45.755749335261136m, 21.231858987508456m) },
+                { "Prefectura Judetului Timis", (45.75562234744903m, 21.238427101113256m) },
+                { "3 August 1919", (45.756721582695015m, 21.244925698896484m) },
+                { "Piata Traian", (45.75749500845264m, 21.24916939645183m) },
+                { "Fabrica De Bere Timisoara", (45.753010052800356m, 21.250171969257572m) },
+                { "Banatim", (45.74889039428735m, 21.25270156463139m) },
+                { "Deliblata", (45.74715727437089m, 21.246582097173373m) },
+                { "Sala Olimpia", (45.74533430140636m, 21.241446790566474m) },
+                { "Cluj", (45.74388560125414m, 21.237128709215785m) },
+                { "Piata Crucii", (45.74200588120218m, 21.232466650088003m) },
+                { "Piata Nicolae Balcescu", (45.741762533858214m, 21.22514596492361m) },
+                { "Parc Doina", (45.744444574004696m, 21.222379518441844m) }
+            };
+
+            stationsData.Keys.ToList().ForEach(stationName =>
+            {
+                builder.Entity<Station>().HasData(new Entities.Station
+                {
+                    Id = Guid.NewGuid().ToString(),
+                    Name = stationName,
+                    Latitude = stationsData[stationName].Item1,
+                    Longitude = stationsData[stationName].Item2,
+                    RouteId = routeId
+                });
+            });
+
+            var reversedList = stationsData.Keys.ToList();
+            reversedList.Reverse();
+
+            reversedList.ForEach(stationName =>
+            {
+                builder.Entity<Station>().HasData(new Entities.Station
+                {
+                    Id = Guid.NewGuid().ToString(),
+                    Name = stationName,
+                    Latitude = stationsData[stationName].Item1,
+                    Longitude = stationsData[stationName].Item2,
+                    RouteId = reversedRouteId
+                });
+            });
+            #endregion Add Default Stations
+
+
             base.OnModelCreating(builder);
             builder.Entity<Entities.Route>()
                 .HasKey(x => x.RouteId);
@@ -135,36 +228,25 @@ namespace rina.Data
                 .HasOne(x => x.Vehicle)
                 .WithMany(x => x.Routes)
                 .HasForeignKey(x => x.VehicleId);
-            builder.Entity<Entities.Route>()
-                .HasMany(x => x.Stations)
-                .WithMany(x => x.Routes);
 
 
             builder.Entity<Station>()
                 .HasKey(x => x.Id);
             builder.Entity<Station>()
-                .HasMany(x => x.Routes)
-                .WithMany(x => x.Stations);
+                .HasOne(x => x.Route)
+                .WithMany(x => x.Stations)
+                .HasForeignKey(x => x.RouteId);
 
 
             builder.Entity<Vehicle>()
                 .HasKey(x => x.VehicleId);
             builder.Entity<Vehicle>()
-                .HasMany(x => x.Routes)
+                .HasOne(x => x.VehicleDriver)
                 .WithOne(x => x.Vehicle)
-                .HasForeignKey(x => x.VehicleId);
+                .HasForeignKey<VehicleDriver>(x => x.VehicleId);
 
-
             builder.Entity<VehicleDriver>()
-                .HasKey(x => new { x.Id, x.VehicleId, x.DriverId });
-            builder.Entity<VehicleDriver>()
-                .HasOne(x => x.Vehicle)
-                .WithMany(x => x.VehicleDrivers)
-                .HasForeignKey(x => x.VehicleId);
-            builder.Entity<VehicleDriver>()
-                .HasOne(x => x.Driver)
-                .WithMany()
-                .HasForeignKey(x => x.DriverId);
+                .HasKey(x => x.Id);
 
 
             builder.Entity<ApplicationUser>()

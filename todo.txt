@@ -1,9 +1,4 @@
 ﻿
-- index for driver: enter vehicle name(select from below), select route(starting point)
-- add db for	vehicles 
-				vehicle stations
-				route - (has an id (from which we know what driver has that route), multiple stations)
-				stations
 
 - fix page for adding new 
 		-vehicles

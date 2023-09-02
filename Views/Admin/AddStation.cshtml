@@ -2,6 +2,10 @@
 
 <div id="map"></div>
 
+<div class="AddStation">
+    <button type="submit" class="btn" style="position: relative; margin: 5vh;">Add Station</button>
+</div>
+
 @*<p>45.74716518869609, 21.231415414817413</p>
 <p>45.74741056734637, 21.226795337026623</p>*@
 
@@ -38,42 +42,4 @@
         document.getElementById('info').innerHTML = JSON.stringify(e.lngLat.wrap());
     });
 
-    var origin = [21.246275, 45.737673];
-    var destination = [21.225905, 45.749515];
-
-
-    map.on('load', () => {
-        fetch(
-            `https://api.mapbox.com/directions/v5/mapbox/driving/${origin[0]},${origin[1]};${destination[0]},${destination[1]}?access_token=${mapboxgl.accessToken}`
-            )
-        .then((response) => response.json())
-        .then((data) => {
-            var route = data.routes[0].geometry;
-			
-		    var decodedRoute = polyline.toGeoJSON(route);
-            console.log(decodedRoute);
-            map.addSource('route', {
-                'type': 'geojson',
-                'data': {
-                    'type': 'Feature',
-                    'properties': {},
-                    'geometry': decodedRoute
-                }
-            });
-            map.addLayer({
-                'id': 'route',
-                'type': 'line',
-                'source': 'route',
-                'layout': {
-                    'line-join': 'round',
-                    'line-cap': 'round'
-                },
-                'paint': {
-                    'line-color': '#888',
-                    'line-width': 8
-                }
-            });
-        });
-    });
-    
 </script>
