@@ -81,6 +81,48 @@ input:focus {
         outline: none !important;
     }
 
+#profile {
+    color: #91403a;
+}
+    #profile:visited {
+        background-color: #91403a;
+        color: white;
+    }
+    #profile.nav-link:active {
+        color: #91403a;
+    }
+#email.nav-link {
+    color: #91403a !important;
+}
+    #email.nav-link:visited {
+        background-color: #91403a !important;
+        color: white;
+    }
+#change-password.nav-link {
+    color: #91403a !important;
+}
+    #change-password.nav-link:visited {
+        background-color: #91403a !important;
+        color: white;
+    }
+#two-factor.nav-link {
+    color: #91403a !important;
+}
+    #two-factor.nav-link:visited {
+        background-color: #91403a !important;
+        color: white;
+    }
+#personal-data.nav-link {
+    color: #91403a !important;
+}
+    #personal-data.nav-link:visited {
+        background-color: #91403a !important;
+        color: white;
+    }
+#delete.btn.btn-danger {
+    margin-top: 1vh;
+}
+
 /*-------------- driver-pov-page -----------*/
 .start .btn {
     position: relative;

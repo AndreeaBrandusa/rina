@@ -28,7 +28,7 @@ namespace rina.Controllers
         [HttpPost]
         public async Task<IActionResult> AddRoute(RouteModel model)
         {
-            if (!await _routeService.AddRouteAsync(model))
+            if (!await _routeService.AddRouteWithStationsAsync(model))
             {
                 return RedirectToAction("Index", "Home");
             }

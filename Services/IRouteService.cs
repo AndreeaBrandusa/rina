@@ -4,6 +4,7 @@ namespace rina.Services
 {
     public interface IRouteService
     {
-        Task<bool> AddRouteAsync(RouteModel model);
+        Task<List<Entities.Route>> GetRoutes();
+        Task<bool> AddRouteWithStationsAsync(RouteModel model);
     }
 }

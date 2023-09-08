@@ -1,6 +1,7 @@
 ﻿@using rina.Models.Route
 @model RouteModel
 
+<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
 <script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-draw/v1.0.9/mapbox-gl-draw.js'></script>
 <link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-draw/v1.0.9/mapbox-gl-draw.css' type='text/css' />
 
@@ -8,23 +9,25 @@
 <div id="map"></div>
 
 <div class="left-container" style="position: relative;">
-    <form asp-action="AddRoute" id="AddRoute">
-        <h3 style="text-align: center; margin-bottom: 5vh; color: white; font-size: 1.1rem;">ADD STATION</h3>
+    <div id="stations">
 
-        <input asp-for="Stations" type="text" placeholder="station name">
+    </div>
 
+    <form asp-action="AddRoute" id="AddRoute" style="overflow-y: auto;">
+        <h3 style="text-align: center; margin-bottom: 5vh; color: white; font-size: 1.1rem;">ADD ROUTE</h3>
+
+        <input asp-for="Stations" id="stationName" type="text" placeholder="station name">
+        <input asp-for="Stations" id="stationCoords" type="text" placeholder="station coordinates">
+
+        <div id="stationInputs">
+            
+        </div>
+
+        <button type="button" id="addStationBtn" class="btn" style="position: relative; margin: 5vh 0 0 0;">Add New Station</button>
         <button type="submit" class="btn" style="position: relative; margin: 5vh 0 0 0;">Add Route</button>
     </form>
 </div>
 
-
-@*<div class="info-box">
-  <p>
-    Draw your route using the draw tools on the right. To get the most
-    accurate route match, draw points at regular intervals.
-  </p>
-  <div id="directions"></div>
-</div>*@
 
 <script>
     // Add your Mapbox access token
@@ -34,6 +37,32 @@
         style: 'mapbox://styles/mapbox/streets-v12', // style URL
         center: [21.213444, 45.754082], // starting position [lng, lat]
         zoom: 12.5 // starting zoom
+    });
+
+    const stationInputsContainer = document.getElementById('stationInputs');
+    const addStationBtn = document.getElementById('addStationBtn');
+    const stationCounter = 0;
+
+    addStationBtn.addEventListener('click', () => {
+        const stationInputDiv = document.createElement('div');
+        stationInputDiv.classList.add('station-input');
+
+        const stationNameInput = document.createElement('input');
+        stationNameInput.name = `Stations[${stationCounter}].Name`;
+        stationNameInput.type = 'text';
+        stationNameInput.placeholder = 'Station Name';
+
+        const stationCoordsInput = document.createElement('input');
+        stationCoordsInput.name = `Stations[${stationCounter}].Coordinates`;
+        stationCoordsInput.type = 'text';
+        stationCoordsInput.placeholder = 'Station Coordinates';
+
+        stationInputDiv.appendChild(stationNameInput);
+        stationInputDiv.appendChild(stationCoordsInput);
+        stationInputsContainer.appendChild(stationInputDiv);
+
+        // Increment station counter
+        stationCounter++;
     });
 
 
@@ -118,8 +147,10 @@
         const data = draw.getAll();
         const lastFeature = data.features.length - 1;
         const coords = data.features[lastFeature].geometry.coordinates;
+
         // Format the coordinates
         const newCoords = coords.join(';');
+
         // Set the radius for each coordinate pair to 25 meters
         const radius = coords.map(() => 25);
         getMatch(newCoords, radius, profile);
@@ -129,12 +160,14 @@
     async function getMatch(coordinates, radius, profile) {
         // Separate the radiuses with semicolons
         const radiuses = radius.join(';');
+
         // Create the query
         const query = await fetch(
             `https://api.mapbox.com/matching/v5/mapbox/${profile}/${coordinates}?geometries=geojson&radiuses=${radiuses}&steps=true&access_token=${mapboxgl.accessToken}`,
             { method: 'GET' }
         );
         const response = await query.json();
+
         // Handle errors
         if (response.code !== 'Ok') {
             alert(
@@ -143,25 +176,9 @@
             return;
         }
         const coords = response.matchings[0].geometry;
+
         // Draw the route on the map
         addRoute(coords);
-        getInstructions(response.matchings[0]);
-    }
-
-    function getInstructions(data) {
-        // Target the sidebar to add the instructions
-        const directions = document.getElementById('directions');
-        let tripDirections = '';
-        // Output the instructions for each step of each leg in the response object
-        for (const leg of data.legs) {
-            const steps = leg.steps;
-            for (const step of steps) {
-            tripDirections += `<li>${step.maneuver.instruction}</li>`;
-            }
-        }
-        directions.innerHTML = `<p><strong>Trip duration: ${Math.floor(
-            data.duration / 60
-        )} min.</strong></p><ol>${tripDirections}</ol>`;
     }
 
     // Draw the Map Matching route as a new layer on the map
@@ -187,7 +204,7 @@
                 'line-cap': 'round'
             },
             'paint': {
-                'line-color': '#03AA46',
+                'line-color': '#bf5d56',
                 'line-width': 8,
                 'line-opacity': 0.8
             }
@@ -202,3 +219,59 @@
         map.removeSource('route');
     }
 </script>
+
+    @*const getAllStations {
+        $("#stations").html("<div style='background-color:yellow; border:1px solid red; padding:3px; width:200px'>Please Wait...</div>");
+        
+        $.ajax({
+            type: "POST",
+            url: "StationController.cs/Stations",
+            data: "{}",
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            success: OnSuccess,
+            error: OnError
+        });
+    }
+    function OnSuccess(data) {
+            var TableContent = "<table border='0'>" +
+                                    "<tr>" +
+                                        "<td>Rank</td>" +
+                                        "<td>Company Name</td>" +
+                                        "<td>Revenue</td>" +
+                                        "<td>Industry</td>" +
+                                    "</tr>";
+            for (var i = 0; i < data.d.length; i++) {
+                TableContent += "<tr>" +
+                        "<td>"+ data.d[i].Rank +"</td>" +
+                        "<td>"+data.d[i].CompanyName+"</td>" +
+                        "<td>"+data.d[i].Revenue+"</td>" +
+                        "<td>"+data.d[i].Industry+"</td>" +
+                    "</tr>";
+            }
+            TableContent += "</table>";
+ 
+            $("#stations").html(TableContent);
+    }
+    function OnError(data) {
+ 
+    }*@
+
+
+@*    function getStationCoords (event) {
+        var coordinates = event.lngLat;
+        var latitudeInput = document.getElementById('Latitude').value = coordinates.lat;
+        var longitudeInput = document.getElementById('Longitude').value = coordinates.lng;
+
+        if (marker) {
+            marker.remove();
+        }
+
+        marker = new mapboxgl.Marker({
+            color: '#bf5d56',
+            scale: 1.2
+        })
+        .setLngLat(coordinates)
+        .addTo(map);
+    }
+    map.on('click', getStationCoords);*@

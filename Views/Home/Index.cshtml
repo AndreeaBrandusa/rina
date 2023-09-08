@@ -12,40 +12,19 @@
     const map = new mapboxgl.Map({
         container: 'map', // container ID
         style: 'mapbox://styles/mapbox/streets-v12', // style URL
-        center: [21.213444, 45.754082], // starting position [lng, lat]
+        center: [21.227585019976573, 45.75733446053322], // starting position [lng, lat]
         zoom: 12.5 // starting zoom
     });
-
 
     // Add zoom and rotation controls to the map.
     map.addControl(new mapboxgl.NavigationControl());
 
-
-    // Add geolocate control to the map
-    map.addControl(
-        new mapboxgl.GeolocateControl({
-            positionOptions: {
-                enableHighAccuracy: true
-            },
-            // When active the map will receive updates to the device's location as it changes.
-            trackUserLocation: true,
-            // Draw an arrow next to the location dot to indicate which direction the device is heading.
-            showUserHeading: true
-        })
-    );
 </script>
 
 @if (User.IsInRole("Administrator"))
 {
     <script>
-        // Create a default Marker and add it to the map.
-        const marker = new mapboxgl.Marker({
-            color: '#E74C3C', // Customize the marker color
-            scale: 1.2, // Adjust the marker size
-            draggable: true, // Make the marker draggable if desired
-        })
-        .setLngLat([21.213444, 45.754082])
-        .addTo(map);
+        map.getCanvas().style.cursor = 'default';
     </script>
 }
 
@@ -54,54 +33,75 @@
     <div class="left-container">
         <input type="text" placeholder="enter vehicle name">
 
-        <fieldset id="route" class="p-3" style="border: 1px solid #ad5049; margin-top: 10px; margin-bottom: 5vh;">
-            <legend class="float-none w-auto px-3" style="text-align: left; font-size: 0.9rem; color: #91403a;">
-                Select route
-            </legend>
-
-            <select name="route" id="select" autocomplete="off" placeholder="select route" required style="width: 100%; padding: 5px 0 5px 0; color: gray;">
-                <option>station 1 - station 4</option>
-                <option>station 4 - station 1</option>
-            </select>
-        </fieldset>
-
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit" 
-            style="">
+        <button id="btn" class="btn btn-outline-success my-2 my-sm-0" type="submit" style="float: right; margin-top: 5px!important;">
             Navigate
         </button>
 
-@*        <fieldset id="breakdownReason" class="p-3" style="border: 1px solid #ad5049; margin-top: 30vh; margin-bottom: 10vh;">
+        <fieldset id="breakdownReason" class="p-3" style="border: 1px solid #ad5049; margin-top: 60vh; margin-bottom: 10vh;">
             <legend class="float-none w-auto px-3" style="text-align: left; font-size: 0.9rem; color: #91403a;">
                 Select breakdown reason
             </legend>
-            <select name="breakdownReason" id="select" autocomplete="off" required style="width: 100%; padding: 5px 0 5px 0; color: gray;">
+            <select name="delayReason" id="select" autocomplete="off" required style="width: 100%; padding: 5px 0 5px 0; color: gray;">
+                <option>Traffic</option>
                 <option>Flat tire</option>
                 <option>Engine breakdown</option>
                 <option>Got in an accident</option>
                 <option>No fuel</option>
                 <option>Other</option>
             </select>
-        </fieldset>*@
+        </fieldset>
     </div>
+
+    <script>
+        const btn = document.getElementById('btn');
+        // Toggle button text on click
+        btn.addEventListener('click', function handleClick() {
+          const initialText = 'Navigate';
+
+          if (btn.textContent.toLowerCase().includes(initialText.toLowerCase())) {
+            btn.textContent = 'End trip';
+          } else {
+            btn.textContent = initialText;
+          }
+        });
+
+
+        // Add geolocate control to the map
+        map.addControl(
+            new mapboxgl.GeolocateControl({
+                positionOptions: {
+                    enableHighAccuracy: true
+                },
+                // When active the map will receive updates to the device's location as it changes.
+                trackUserLocation: true,
+                // Draw an arrow next to the location dot to indicate which direction the device is heading.
+                showUserHeading: true
+            })
+        );
+    </script>
 }
 
 @if (User.IsInRole("User"))
 {
-    @*<div class="left-container">
-        <input type="text" placeholder="enter starting point">
+    <div class="left-container">
+        <input type="text" id="currentLocation" placeholder="enter starting point">
         <input type="text" placeholder="enter destination">
-    </div>*@
+    </div>
+
     <script>
-        // Display navigation directions
+        // Add geolocate control to the map
         map.addControl(
-            new MapboxDirections({
-                accessToken: mapboxgl.accessToken,
-                controls: {
-                    profileSwitcher: false,
-                    instructions: false
-                }
-            }),
-            'top-left'
+            new mapboxgl.GeolocateControl({
+                positionOptions: {
+                    enableHighAccuracy: true
+                },
+
+                // When active the map will receive updates to the device's location as it changes.
+                trackUserLocation: true,
+
+                // Draw an arrow next to the location dot to indicate which direction the device is heading.
+                showUserHeading: true
+            })
         );
     </script>
 }

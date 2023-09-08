@@ -1,6 +1,4 @@
-﻿using rina.Models.Route;
-
-namespace rina.Models.Vehicle
+﻿namespace rina.Models.Vehicle
 {
     public class VehicleModel
     {
@@ -12,6 +10,6 @@ namespace rina.Models.Vehicle
 
         public decimal Longitude { get; set; }
 
-        public List<RouteModel> Routes { get; set; }
+        public string RouteId { get; set; }
     }
 }

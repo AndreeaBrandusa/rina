@@ -1,5 +1,9 @@
-﻿using rina.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using rina.Data;
+using rina.Entities;
 using rina.Models.Route;
+using rina.Models.Station;
+using rina.Utils;
 
 namespace rina.Services
 {
@@ -12,9 +16,14 @@ namespace rina.Services
             _context = context;
         }
 
-        public async Task<bool> AddRouteAsync(RouteModel model)
+        public async Task<List<Entities.Route>> GetRoutes()
         {
-            if (model == null) return false;
+            return await _context.Route.ToListAsync();
+        }
+
+        public async Task<bool> AddRouteWithStationsAsync(RouteModel routeModel)
+        {
+            if (routeModel == null || routeModel.Stations == null || routeModel.Stations.Count == 0) return false;
 
             // generate routeId 
             string routeId = Guid.NewGuid().ToString();
@@ -22,13 +31,40 @@ namespace rina.Services
             var routeEntity = new Entities.Route
             {
                 RouteId = routeId,
-                VehicleId = model.VehicleId
+                VehicleId = routeModel.VehicleId,
+                Stations = new List<Station>()
             };
-
-            // add entities to database
             _context.Route.Add(routeEntity);
 
+
+            // Iterate through the list of station models
+            foreach (var stationModel in routeModel.Stations)
+            {
+                var stationEntity = ConvertCoordinatesForDatabase(stationModel);
+
+                string stationId = Guid.NewGuid().ToString();
+                stationEntity.Id = stationId;
+
+                // Add the station entity to the database
+                _context.Station.Add(stationEntity);
+                // Add the station to the route's list of stations
+                routeEntity.Stations.Add(stationEntity);
+            }
+
             return await _context.SaveAsync();
+        }
+
+        private Station ConvertCoordinatesForDatabase(StationModel model)
+        {
+            if (model is null) return new Station();
+
+            return new Station
+            {
+                Name = model.Name,
+                RouteId = model.RouteId,
+                Latitude = DecimalConverter.ConvertForDatabase(model.Latitude),
+                Longitude = DecimalConverter.ConvertForDatabase(model.Longitude)
+            };
         }
     }
 }
