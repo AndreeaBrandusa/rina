@@ -39,10 +39,34 @@
 
         marker = new mapboxgl.Marker({
             color: '#bf5d56',
-            scale: 1.2
+            scale: 1.2,
+            type: 'Point'
         })
         .setLngLat(coordinates)
         .addTo(map);
     }
     map.on('click', add_marker);
+
+
+    function display_stations () {
+        rina.StationService.GetStationsAsync();
+
+        fetch("Station/Stations")
+            .then(response => response.json())
+            .then(data => _displayItems(data))
+            .catch(error => console.error('Unable to get items.', error));
+
+
+        marker = new mapboxgl.Marker({
+            color: '#bf5d56',
+            scale: 1.2,
+            type: 'Point'
+        })
+        .setLngLat(coordinates)
+        .addTo(map);
+    }
+    map.on('load', display_stations);
+
+    
+
 </script>

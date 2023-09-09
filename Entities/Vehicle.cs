@@ -1,7 +1,4 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace rina.Entities
 {
@@ -18,6 +15,8 @@ namespace rina.Entities
         public decimal Longitude { get; set; }
 
         public VehicleDriver VehicleDriver { get; set; }
+
+        public string RouteId { get; set; }
         public ICollection<Route> Routes { get; set; }
     }
 }

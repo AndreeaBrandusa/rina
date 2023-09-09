@@ -11,8 +11,8 @@ namespace rina.Entities
         public decimal Latitude { get; set; }
         public decimal Longitude { get; set; }
 
-        public string RouteId { get; set; }
+        public string? RouteId { get; set; }
 
-        public Route Route { get; set; }
+        public Route? Route { get; set; }
     }
 }

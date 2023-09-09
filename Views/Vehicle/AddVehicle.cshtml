@@ -9,7 +9,8 @@
     <form asp-action="AddVehicle" id="AddVehicleForm">
         <h3>ADD VEHICLE</h3>
 
-        <input asp-for="Name" type="text" placeholder="vehicle name">
+        <input asp-for="Name" type="text"
+            placeholder="vehicle name">
         <input asp-for="Type" type="text" placeholder="vehicle type">
       
         <fieldset id="stations" class="p-2" 
@@ -22,10 +23,12 @@
                 id="select" autocomplete="off" required 
                 style="width: 100%; padding: 5px 0 5px 0; color: gray; height: 5vh; margin: 0 2vh 2vh 0; display: block;">
                 <option>Select route</option>
-
-                @foreach(var option in model.Routes)
+                @if(model != null)
                 {
-                    <option value="@option.Key">@option.Value.Item1.Name.ToString() - @option.Value.Item2.Name.ToString()</option>
+                    @foreach(var option in model.Routes)
+                    {
+                        <option value="@option.Key">@option.Value.Item1.Name.ToString() - @option.Value.Item2.Name.ToString()</option>
+                    }
                 }
             </select>
         </fieldset>

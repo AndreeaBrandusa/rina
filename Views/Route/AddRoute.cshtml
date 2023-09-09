@@ -13,18 +13,25 @@
 
     </div>
 
-    <form asp-action="AddRoute" id="AddRoute" style="overflow-y: auto;">
+    <form asp-action="AddRoute" id="AddRoute">
         <h3 style="text-align: center; margin-bottom: 5vh; color: white; font-size: 1.1rem;">ADD ROUTE</h3>
 
-        <input asp-for="Stations" id="stationName" type="text" placeholder="station name">
-        <input asp-for="Stations" id="stationCoords" type="text" placeholder="station coordinates">
+        <div class="stations-container" style="overflow-y: auto; height: 65vh;">
+            <fieldset class="stations p-2" style="border: 1px solid #ad5049; margin-top: 10px; /*display: flex; justify-content: space-between;*/ align-items: center;">
+                <legend class="float-none w-auto px-3" style="text-align: left; font-size: 1.1rem; color: #91403a;">
+                    Station #1
+                </legend>
+                <input asp-for="Stations" id="stationName1" type="text" placeholder="station name">
+                <input asp-for="Stations" id="stationLat1" type="text" placeholder="station latitude">
+                <input asp-for="Stations" id="stationLong1" type="text" placeholder="station longitude">
+            </fieldset>
+        </div>
 
         <div id="stationInputs">
             
         </div>
 
-        <button type="button" id="addStationBtn" class="btn" style="position: relative; margin: 5vh 0 0 0;">Add New Station</button>
-        <button type="submit" class="btn" style="position: relative; margin: 5vh 0 0 0;">Add Route</button>
+        <button type="button" id="send-btn" class="btn" style="position: relative; margin: 5vh 0 0 0; float: right;">Add Route</button>
     </form>
 </div>
 
@@ -38,33 +45,6 @@
         center: [21.213444, 45.754082], // starting position [lng, lat]
         zoom: 12.5 // starting zoom
     });
-
-    const stationInputsContainer = document.getElementById('stationInputs');
-    const addStationBtn = document.getElementById('addStationBtn');
-    const stationCounter = 0;
-
-    addStationBtn.addEventListener('click', () => {
-        const stationInputDiv = document.createElement('div');
-        stationInputDiv.classList.add('station-input');
-
-        const stationNameInput = document.createElement('input');
-        stationNameInput.name = `Stations[${stationCounter}].Name`;
-        stationNameInput.type = 'text';
-        stationNameInput.placeholder = 'Station Name';
-
-        const stationCoordsInput = document.createElement('input');
-        stationCoordsInput.name = `Stations[${stationCounter}].Coordinates`;
-        stationCoordsInput.type = 'text';
-        stationCoordsInput.placeholder = 'Station Coordinates';
-
-        stationInputDiv.appendChild(stationNameInput);
-        stationInputDiv.appendChild(stationCoordsInput);
-        stationInputsContainer.appendChild(stationInputDiv);
-
-        // Increment station counter
-        stationCounter++;
-    });
-
 
     const draw = new MapboxDraw({
         // Instead of showing all the draw tools, show only the line string and delete tools
@@ -129,13 +109,54 @@
         ]
     });
 
+    const button = document.getElementById("send-btn");
+    button.addEventListener("click", sendStations);
+
     // Add the draw tool to the map
     map.addControl(draw);
 
     // Add create, update, or delete actions
+    map.on('click', showCoordinates);
     map.on('draw.create', updateRoute);
     map.on('draw.update', updateRoute);
     map.on('draw.delete', removeRoute);
+
+    function getStationElements(index) {
+        return `<fieldset class="stations" class="p-2" style="border: 1px solid #ad5049; margin-top: 10px; align-items: center;">
+            <legend class="float-none w-auto px-3" style="text-align: left; font-size: 1.1rem; color: #91403a;">
+                Station #${index}
+            </legend>
+            <input id="stationName${index}" type="text" placeholder="station name">
+            <input id="stationLat${index}" type="text" placeholder="station latitude">
+            <input id="stationLong${index}" type="text" placeholder="station longitude">
+        </fieldset>`;
+    }
+
+    function showCoordinates() {
+        const data = draw.getAll();
+        const coords = data.features.at(-1).geometry.coordinates;
+        const index = coords.length - 2;
+
+        let nameInput;
+        let latInput;
+        let longInput;
+        console.log(coords, index);
+
+        if(index === 0) {
+            latInput = document.getElementById("stationLat1");
+            longInput = document.getElementById("stationLong1");
+        }
+        else {
+            stationsContainer = document.getElementsByClassName("stations-container")[0];
+            stationsContainer.insertAdjacentHTML("beforeend",  getStationElements(index + 1))
+
+            latInput = document.getElementById(`stationLat${index + 1}`);
+            longInput = document.getElementById(`stationLong${index + 1}`);
+        }
+
+        latInput.value = coords[index][1];
+        longInput.value = coords[index][0];
+    }
 
     // Use the coordinates you just drew to make the Map Matching API request
     function updateRoute() {
@@ -218,60 +239,41 @@
         map.removeLayer('route');
         map.removeSource('route');
     }
-</script>
 
-    @*const getAllStations {
-        $("#stations").html("<div style='background-color:yellow; border:1px solid red; padding:3px; width:200px'>Please Wait...</div>");
-        
-        $.ajax({
-            type: "POST",
-            url: "StationController.cs/Stations",
-            data: "{}",
-            dataType: "json",
-            contentType: "application/json; charset=utf-8",
-            success: OnSuccess,
-            error: OnError
-        });
-    }
-    function OnSuccess(data) {
-            var TableContent = "<table border='0'>" +
-                                    "<tr>" +
-                                        "<td>Rank</td>" +
-                                        "<td>Company Name</td>" +
-                                        "<td>Revenue</td>" +
-                                        "<td>Industry</td>" +
-                                    "</tr>";
-            for (var i = 0; i < data.d.length; i++) {
-                TableContent += "<tr>" +
-                        "<td>"+ data.d[i].Rank +"</td>" +
-                        "<td>"+data.d[i].CompanyName+"</td>" +
-                        "<td>"+data.d[i].Revenue+"</td>" +
-                        "<td>"+data.d[i].Industry+"</td>" +
-                    "</tr>";
-            }
-            TableContent += "</table>";
- 
-            $("#stations").html(TableContent);
-    }
-    function OnError(data) {
- 
-    }*@
+    async function sendStations() {
+        const stations = document.getElementsByClassName("stations");
+        const stationsList = [];
 
+        for (let i = 0; i < stations.length; i++) {
+            const name = document.getElementById(`stationName${i + 1}`);
+            const lat = document.getElementById(`stationLat${i + 1}`);
+            const long = document.getElementById(`stationLong${i + 1}`);
 
-@*    function getStationCoords (event) {
-        var coordinates = event.lngLat;
-        var latitudeInput = document.getElementById('Latitude').value = coordinates.lat;
-        var longitudeInput = document.getElementById('Longitude').value = coordinates.lng;
-
-        if (marker) {
-            marker.remove();
+            stationsList.push({
+                "Name": name.value,
+                "Latitude": lat.value,
+                "Longitude": long.value
+            });
         }
 
-        marker = new mapboxgl.Marker({
-            color: '#bf5d56',
-            scale: 1.2
-        })
-        .setLngLat(coordinates)
-        .addTo(map);
+        const data = {
+            "Stations": stationsList
+        }
+
+        console.log(data);
+        response = await fetch("/Route/AddRoute", {
+            "method": "post",
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+        });
+
+        if (response.ok) {
+            alert("Route added succesfully.")
+        }
+        else {
+            alert("There was an error adding the route.");
+        }
+
+        window.location.reload();
     }
-    map.on('click', getStationCoords);*@
+</script>

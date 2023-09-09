@@ -26,7 +26,7 @@ namespace rina.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddRoute(RouteModel model)
+        public async Task<IActionResult> AddRoute([FromBody] RouteModel model)
         {
             if (!await _routeService.AddRouteWithStationsAsync(model))
             {

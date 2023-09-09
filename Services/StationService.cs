@@ -28,7 +28,8 @@ namespace rina.Services
 
         public async Task<bool> AddStationAsync(StationModel model)
         {
-            if (model is null) return false;
+            if (model is null) 
+                return false;
 
             // generate stationId 
             string stationId = Guid.NewGuid().ToString();
@@ -45,7 +46,8 @@ namespace rina.Services
 
         private Station ConvertCoordinatesFromDatabase(Station station)
         {
-            if (station is null) return new Station();
+            if (station is null) 
+                return new Station();
 
             return new Station
             {
@@ -59,7 +61,8 @@ namespace rina.Services
 
         private Station ConvertCoordinatesForDatabase(StationModel model)
         {
-            if (model is null) return new Station();
+            if (model is null) 
+                return new Station();
 
             return new Station
             {

@@ -1,14 +1,10 @@
 ﻿
-- adaugare ruta de pe site
-- adaugare vehicul
-- afisare statii harta
-- afisare ruta driver
-- cautare destinatie
+- add vehicle /
+- show stations on map
+- show driver on route
+- search destination
+- show destination route
 
-- fix page for adding new
-		-stations(select location on map)
-		---routes
-- fix index page for adding destination and showing on map
 - bus simulator
 
 optional:

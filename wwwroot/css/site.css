@@ -318,3 +318,9 @@ input:focus {
         .account a:hover {
             filter: brightness(130%);
         }
+
+/*------------- other ------------*/
+
+.stations {
+    margin-bottom: 25px;
+}

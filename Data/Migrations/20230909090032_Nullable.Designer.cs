@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using rina.Data;
 
@@ -11,9 +12,10 @@ using rina.Data;
 namespace rina.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230909090032_Nullable")]
+    partial class Nullable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -51,22 +53,22 @@ namespace rina.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "882cacf5-92a6-4567-a517-2173d7089c6a",
-                            ConcurrencyStamp = "882cacf5-92a6-4567-a517-2173d7089c6a",
+                            Id = "2b6db879-996c-4bf6-8b5b-d56071f086b5",
+                            ConcurrencyStamp = "2b6db879-996c-4bf6-8b5b-d56071f086b5",
                             Name = "User",
                             NormalizedName = "USER"
                         },
                         new
                         {
-                            Id = "9beeed4b-d556-4454-bdfc-42fb7ee52514",
-                            ConcurrencyStamp = "9beeed4b-d556-4454-bdfc-42fb7ee52514",
+                            Id = "e1891063-4235-4dfa-a3ac-75fbd36272f7",
+                            ConcurrencyStamp = "e1891063-4235-4dfa-a3ac-75fbd36272f7",
                             Name = "Driver",
                             NormalizedName = "DRIVER"
                         },
                         new
                         {
-                            Id = "826edf02-be96-4354-a3b9-76be2dae239b",
-                            ConcurrencyStamp = "826edf02-be96-4354-a3b9-76be2dae239b",
+                            Id = "c375e735-0ec0-45ff-a2af-3a2698da9cd9",
+                            ConcurrencyStamp = "c375e735-0ec0-45ff-a2af-3a2698da9cd9",
                             Name = "Administrator",
                             NormalizedName = "ADMIN"
                         });
@@ -163,18 +165,18 @@ namespace rina.Data.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = "54a34540-f11d-4b99-a1a7-c5b0869c90b0",
-                            RoleId = "826edf02-be96-4354-a3b9-76be2dae239b"
+                            UserId = "fcb33a2b-eb03-4d78-950a-226ba43549c3",
+                            RoleId = "c375e735-0ec0-45ff-a2af-3a2698da9cd9"
                         },
                         new
                         {
-                            UserId = "f0efd0a3-6dec-4765-bc33-3d25f126f8d9",
-                            RoleId = "9beeed4b-d556-4454-bdfc-42fb7ee52514"
+                            UserId = "f7ecd26c-27b2-40e8-9f36-d1b9091b7a3b",
+                            RoleId = "e1891063-4235-4dfa-a3ac-75fbd36272f7"
                         },
                         new
                         {
-                            UserId = "4aa81014-cdb0-4ae2-8b12-f28addfd1f62",
-                            RoleId = "882cacf5-92a6-4567-a517-2173d7089c6a"
+                            UserId = "a8f23a8e-560b-49b2-9141-f54511489dc5",
+                            RoleId = "2b6db879-996c-4bf6-8b5b-d56071f086b5"
                         });
                 });
 
@@ -266,46 +268,46 @@ namespace rina.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "54a34540-f11d-4b99-a1a7-c5b0869c90b0",
+                            Id = "fcb33a2b-eb03-4d78-950a-226ba43549c3",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "0bb99aae-1bb4-4dc9-84b0-337da034c1d0",
+                            ConcurrencyStamp = "d5e32ccc-305a-4386-b8f4-1ed49fc573fb",
                             Email = "admin@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEPTnlTWhYhb/rsz3rGtLkcErvyHYu/tX2HcUiHpwYq7RqvziuW4O8GolCIBKtOF/8g==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEJHfRj63YXPHjmyFIilZiR3os5N4+TuqFma4/aGl7crXBWg7KRJdSQEnBfBMmFeUog==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "49775fc8-7995-4599-8a98-5f98dfcde76d",
+                            SecurityStamp = "997946bd-c2c7-429c-b170-a673109f21dc",
                             TwoFactorEnabled = false,
                             UserName = "admin"
                         },
                         new
                         {
-                            Id = "f0efd0a3-6dec-4765-bc33-3d25f126f8d9",
+                            Id = "f7ecd26c-27b2-40e8-9f36-d1b9091b7a3b",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "f3e38952-7c1f-47e9-9308-70795114cd3f",
+                            ConcurrencyStamp = "322052ac-0f5d-4645-b733-775e2e8491a2",
                             Email = "driver@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedUserName = "DRIVER",
-                            PasswordHash = "AQAAAAEAACcQAAAAEHKarOAR5ogzGIbXxJiUnb8VomxkVKr1q55JHAK7+ktaI4iT2kSjmYWZCbv059zEUA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEKEXs4/HebA10vktnOgNTZRaZ42ujXce+3uY4/RxlBYo0MrnJc7EYVkn+TPYzWjjQg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "9fb0a1c0-58a4-41c5-b57d-a733e395b627",
+                            SecurityStamp = "eb841d50-0f27-4b0a-a8f7-85e0c287b52f",
                             TwoFactorEnabled = false,
                             UserName = "driver"
                         },
                         new
                         {
-                            Id = "4aa81014-cdb0-4ae2-8b12-f28addfd1f62",
+                            Id = "a8f23a8e-560b-49b2-9141-f54511489dc5",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "92cbc211-3942-4dac-8c4b-0badb6ec8796",
+                            ConcurrencyStamp = "5a609956-061b-45fc-b023-4441c3a19727",
                             Email = "andreea@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedUserName = "ANDREEA",
-                            PasswordHash = "AQAAAAEAACcQAAAAEHPdP/U+xFGKubeyFChPXK+4ZteczJ0Wgd771xMiY/Tv+lJWPPO9t+u0i8MpcL2k9Q==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEJC/cwWMRcpUyz3TTcDxlRBiekbyUf2HxQD1JQ3kFEQKioFu+Y1ViRu3IVWXz/t5lA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "ca02c2af-9aab-43eb-af45-6c85d8200022",
+                            SecurityStamp = "ab4e889e-e200-4630-afda-d17d4b9d1ebc",
                             TwoFactorEnabled = false,
                             UserName = "andreea"
                         });
@@ -328,12 +330,12 @@ namespace rina.Data.Migrations
                     b.HasData(
                         new
                         {
-                            RouteId = "33e223ce-0f23-4197-9bce-4c357edde27f",
+                            RouteId = "6c0b91ea-886b-4ab5-9672-2ec8a27d4151",
                             VehicleId = "2253d4b4-edba-4041-a314-22968193faf2"
                         },
                         new
                         {
-                            RouteId = "81fe3273-f393-451f-b81c-1dd7a9395c66",
+                            RouteId = "056ff285-3997-43dc-81a8-6a2dd7b0917c",
                             VehicleId = "2253d4b4-edba-4041-a314-22968193faf2"
                         });
                 });
@@ -367,291 +369,291 @@ namespace rina.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "4883d0c3-6c2f-4975-8c15-869da4dd41d0",
+                            Id = "acf1797f-f3b0-49cb-9eb9-43a94056c82f",
                             Latitude = 457482785901011.70000000000000m,
                             Longitude = 212191745283552.70000000000000m,
                             Name = "Piata Maria",
-                            RouteId = "33e223ce-0f23-4197-9bce-4c357edde27f"
+                            RouteId = "6c0b91ea-886b-4ab5-9672-2ec8a27d4151"
                         },
                         new
                         {
-                            Id = "4b198deb-ddd6-427b-bb81-e17e8499e03b",
+                            Id = "867d592d-9d43-486a-8a32-046efa477398",
                             Latitude = 457510922178538.20000000000000m,
                             Longitude = 212236185720668.60000000000000m,
                             Name = "Catedrala Metropolitana",
-                            RouteId = "33e223ce-0f23-4197-9bce-4c357edde27f"
+                            RouteId = "6c0b91ea-886b-4ab5-9672-2ec8a27d4151"
                         },
                         new
                         {
-                            Id = "d5a02bda-350b-47d2-b911-608d8995e00f",
+                            Id = "01aa1d52-0313-4829-b0d1-ac0fc253c31d",
                             Latitude = 457549076999152.70000000000000m,
                             Longitude = 212210508005243.03000000000000m,
                             Name = "Spitalul de copii",
-                            RouteId = "33e223ce-0f23-4197-9bce-4c357edde27f"
+                            RouteId = "6c0b91ea-886b-4ab5-9672-2ec8a27d4151"
                         },
                         new
                         {
-                            Id = "bd4b842e-aa26-4b6b-8355-fc7649c93632",
+                            Id = "d327ff09-4e30-4294-9863-acb3b838d7d8",
                             Latitude = 457561970168036.10000000000000m,
                             Longitude = 212213075532377.32000000000000m,
                             Name = "Brediceanu",
-                            RouteId = "33e223ce-0f23-4197-9bce-4c357edde27f"
+                            RouteId = "6c0b91ea-886b-4ab5-9672-2ec8a27d4151"
                         },
                         new
                         {
-                            Id = "9a78197b-456f-47c7-8d6b-4af6e75825f6",
+                            Id = "166379df-d2fd-4b8e-862b-708e22bb7271",
                             Latitude = 457562516335078.50000000000000m,
                             Longitude = 212229088920353.74000000000000m,
                             Name = "Piata Timisoara 700",
-                            RouteId = "33e223ce-0f23-4197-9bce-4c357edde27f"
+                            RouteId = "6c0b91ea-886b-4ab5-9672-2ec8a27d4151"
                         },
                         new
                         {
-                            Id = "a2c2863a-68d3-4a86-9340-5ed594e2158b",
+                            Id = "1fbcf885-450d-4f6a-b32f-c427a9590c9a",
                             Latitude = 457558725046083.20000000000000m,
                             Longitude = 212276939799686.0000000000000m,
                             Name = "Piata Libertatii",
-                            RouteId = "33e223ce-0f23-4197-9bce-4c357edde27f"
+                            RouteId = "6c0b91ea-886b-4ab5-9672-2ec8a27d4151"
                         },
                         new
                         {
-                            Id = "fd4d744a-dd5e-44f3-bee9-4b3e384f389e",
+                            Id = "e84c4235-b918-43de-9532-82f5528497bd",
                             Latitude = 457557493352611.36000000000000m,
                             Longitude = 212318589875084.56000000000000m,
                             Name = "Hotel Continental",
-                            RouteId = "33e223ce-0f23-4197-9bce-4c357edde27f"
+                            RouteId = "6c0b91ea-886b-4ab5-9672-2ec8a27d4151"
                         },
                         new
                         {
-                            Id = "eb402b4d-cf60-417f-b3cc-2d4bd3580075",
+                            Id = "4876094f-a4e2-4989-8ce4-4c7e990b9cbd",
                             Latitude = 457556223474490.30000000000000m,
                             Longitude = 212384271011132.56000000000000m,
                             Name = "Prefectura Judetului Timis",
-                            RouteId = "33e223ce-0f23-4197-9bce-4c357edde27f"
+                            RouteId = "6c0b91ea-886b-4ab5-9672-2ec8a27d4151"
                         },
                         new
                         {
-                            Id = "79c1cacc-4330-43bc-b4c4-68d3f461bb5b",
+                            Id = "8ea0fee5-4860-4f2a-94c3-8ee874b95d09",
                             Latitude = 457567215826950.15000000000000m,
                             Longitude = 212449256988964.84000000000000m,
                             Name = "3 August 1919",
-                            RouteId = "33e223ce-0f23-4197-9bce-4c357edde27f"
+                            RouteId = "6c0b91ea-886b-4ab5-9672-2ec8a27d4151"
                         },
                         new
                         {
-                            Id = "c584f7b5-e730-424b-b76d-2f8f07071532",
+                            Id = "c0dc6797-f867-432d-8895-4258431e7bff",
                             Latitude = 457574950084526.40000000000000m,
                             Longitude = 212491693964518.30000000000000m,
                             Name = "Piata Traian",
-                            RouteId = "33e223ce-0f23-4197-9bce-4c357edde27f"
+                            RouteId = "6c0b91ea-886b-4ab5-9672-2ec8a27d4151"
                         },
                         new
                         {
-                            Id = "e4684cc4-4211-43be-9776-0903799b4339",
+                            Id = "10156372-88d3-42aa-b2ff-562e10300baf",
                             Latitude = 457530100528003.56000000000000m,
                             Longitude = 212501719692575.72000000000000m,
                             Name = "Fabrica De Bere Timisoara",
-                            RouteId = "33e223ce-0f23-4197-9bce-4c357edde27f"
+                            RouteId = "6c0b91ea-886b-4ab5-9672-2ec8a27d4151"
                         },
                         new
                         {
-                            Id = "6107253e-7306-4a43-8101-1811fc1c97d7",
+                            Id = "95a7e4aa-c04b-420e-be1d-c07d78367353",
                             Latitude = 457488903942873.50000000000000m,
                             Longitude = 212527015646313.90000000000000m,
                             Name = "Banatim",
-                            RouteId = "33e223ce-0f23-4197-9bce-4c357edde27f"
+                            RouteId = "6c0b91ea-886b-4ab5-9672-2ec8a27d4151"
                         },
                         new
                         {
-                            Id = "37ec3e4b-2a79-40cf-a575-582a32f8f4bc",
+                            Id = "d682f8b9-a558-46a8-8a2e-1977678e3348",
                             Latitude = 457471572743708.90000000000000m,
                             Longitude = 212465820971733.73000000000000m,
                             Name = "Deliblata",
-                            RouteId = "33e223ce-0f23-4197-9bce-4c357edde27f"
+                            RouteId = "6c0b91ea-886b-4ab5-9672-2ec8a27d4151"
                         },
                         new
                         {
-                            Id = "8b4a5b55-fbee-4dd8-b207-fb13a2391ad3",
+                            Id = "eb3ca933-2b63-4c46-97db-7c4280924e0c",
                             Latitude = 457453343014063.60000000000000m,
                             Longitude = 212414467905664.74000000000000m,
                             Name = "Sala Olimpia",
-                            RouteId = "33e223ce-0f23-4197-9bce-4c357edde27f"
+                            RouteId = "6c0b91ea-886b-4ab5-9672-2ec8a27d4151"
                         },
                         new
                         {
-                            Id = "3b3c135d-604b-4ad3-adb4-6cf79a1468a6",
+                            Id = "00f212c3-05ed-48bd-9760-5c1b9e6c9bf7",
                             Latitude = 457438856012541.40000000000000m,
                             Longitude = 212371287092157.85000000000000m,
                             Name = "Cluj",
-                            RouteId = "33e223ce-0f23-4197-9bce-4c357edde27f"
+                            RouteId = "6c0b91ea-886b-4ab5-9672-2ec8a27d4151"
                         },
                         new
                         {
-                            Id = "9eef5191-5e60-405a-9e3f-f7e5e933b91e",
+                            Id = "a48ba6a8-8e88-411c-9a15-ab0160a4a01c",
                             Latitude = 457420058812021.80000000000000m,
                             Longitude = 212324666500880.03000000000000m,
                             Name = "Piata Crucii",
-                            RouteId = "33e223ce-0f23-4197-9bce-4c357edde27f"
+                            RouteId = "6c0b91ea-886b-4ab5-9672-2ec8a27d4151"
                         },
                         new
                         {
-                            Id = "133a6f80-0660-4f6f-a8ed-50d5f6db9e15",
+                            Id = "ed3b0594-f0d9-4eba-8439-3f4fc6585942",
                             Latitude = 457417625338582.14000000000000m,
                             Longitude = 212251459649236.10000000000000m,
                             Name = "Piata Nicolae Balcescu",
-                            RouteId = "33e223ce-0f23-4197-9bce-4c357edde27f"
+                            RouteId = "6c0b91ea-886b-4ab5-9672-2ec8a27d4151"
                         },
                         new
                         {
-                            Id = "e71a87ad-470e-4f68-8a5c-e0737c0aa1fe",
+                            Id = "257fd8f9-3b31-4e4e-b431-52ce7b6f8d55",
                             Latitude = 457444445740046.96000000000000m,
                             Longitude = 212223795184418.44000000000000m,
                             Name = "Parc Doina",
-                            RouteId = "33e223ce-0f23-4197-9bce-4c357edde27f"
+                            RouteId = "6c0b91ea-886b-4ab5-9672-2ec8a27d4151"
                         },
                         new
                         {
-                            Id = "fe20e999-a9b2-47b3-9008-f741fd04ade5",
+                            Id = "42cb0289-9186-4bb7-8ab7-54890e61fb14",
                             Latitude = 457444445740046.96000000000000m,
                             Longitude = 212223795184418.44000000000000m,
                             Name = "Parc Doina",
-                            RouteId = "81fe3273-f393-451f-b81c-1dd7a9395c66"
+                            RouteId = "056ff285-3997-43dc-81a8-6a2dd7b0917c"
                         },
                         new
                         {
-                            Id = "deb0ff31-bd0a-47d5-8d1a-67f3601c54c2",
+                            Id = "ea1ab24a-f799-4998-a86e-e2f9e020d5b8",
                             Latitude = 457417625338582.14000000000000m,
                             Longitude = 212251459649236.10000000000000m,
                             Name = "Piata Nicolae Balcescu",
-                            RouteId = "81fe3273-f393-451f-b81c-1dd7a9395c66"
+                            RouteId = "056ff285-3997-43dc-81a8-6a2dd7b0917c"
                         },
                         new
                         {
-                            Id = "238608bc-e193-408f-b0b3-0544bbe58b86",
+                            Id = "67db8011-c38b-4330-8deb-aa64b0f2fa8d",
                             Latitude = 457420058812021.80000000000000m,
                             Longitude = 212324666500880.03000000000000m,
                             Name = "Piata Crucii",
-                            RouteId = "81fe3273-f393-451f-b81c-1dd7a9395c66"
+                            RouteId = "056ff285-3997-43dc-81a8-6a2dd7b0917c"
                         },
                         new
                         {
-                            Id = "6e02e0e9-c81a-417c-8d4d-706ff630342f",
+                            Id = "af74207e-1a14-405d-b4cc-c18c98e2ca11",
                             Latitude = 457438856012541.40000000000000m,
                             Longitude = 212371287092157.85000000000000m,
                             Name = "Cluj",
-                            RouteId = "81fe3273-f393-451f-b81c-1dd7a9395c66"
+                            RouteId = "056ff285-3997-43dc-81a8-6a2dd7b0917c"
                         },
                         new
                         {
-                            Id = "ebc43d54-12ed-4c2c-b7b3-211764011c12",
+                            Id = "9886b22a-5ec8-47ad-bee6-63189e5d0b9e",
                             Latitude = 457453343014063.60000000000000m,
                             Longitude = 212414467905664.74000000000000m,
                             Name = "Sala Olimpia",
-                            RouteId = "81fe3273-f393-451f-b81c-1dd7a9395c66"
+                            RouteId = "056ff285-3997-43dc-81a8-6a2dd7b0917c"
                         },
                         new
                         {
-                            Id = "97dfc4c7-1ebc-4f20-8319-32211796d9be",
+                            Id = "d810afc8-af36-47b4-837b-d6ae5a42903d",
                             Latitude = 457471572743708.90000000000000m,
                             Longitude = 212465820971733.73000000000000m,
                             Name = "Deliblata",
-                            RouteId = "81fe3273-f393-451f-b81c-1dd7a9395c66"
+                            RouteId = "056ff285-3997-43dc-81a8-6a2dd7b0917c"
                         },
                         new
                         {
-                            Id = "00d2884c-8ee8-4e46-81d9-77c866a654c8",
+                            Id = "5e281ce4-f394-40e3-8ce5-2a4fffbed4a2",
                             Latitude = 457488903942873.50000000000000m,
                             Longitude = 212527015646313.90000000000000m,
                             Name = "Banatim",
-                            RouteId = "81fe3273-f393-451f-b81c-1dd7a9395c66"
+                            RouteId = "056ff285-3997-43dc-81a8-6a2dd7b0917c"
                         },
                         new
                         {
-                            Id = "c16ff471-9c9e-4a67-a55d-28bb82011f7d",
+                            Id = "36fd5ec9-2609-4132-8cfc-1ff49be097e8",
                             Latitude = 457530100528003.56000000000000m,
                             Longitude = 212501719692575.72000000000000m,
                             Name = "Fabrica De Bere Timisoara",
-                            RouteId = "81fe3273-f393-451f-b81c-1dd7a9395c66"
+                            RouteId = "056ff285-3997-43dc-81a8-6a2dd7b0917c"
                         },
                         new
                         {
-                            Id = "9197c5b3-cdd3-42b6-bdc9-7d98d6102803",
+                            Id = "9dea5233-98c9-4bb2-9f9e-2036a1c9234a",
                             Latitude = 457574950084526.40000000000000m,
                             Longitude = 212491693964518.30000000000000m,
                             Name = "Piata Traian",
-                            RouteId = "81fe3273-f393-451f-b81c-1dd7a9395c66"
+                            RouteId = "056ff285-3997-43dc-81a8-6a2dd7b0917c"
                         },
                         new
                         {
-                            Id = "34eb3f68-da72-4bd0-a577-2c452c538d3e",
+                            Id = "dad12939-bdca-461a-ac59-e88d42488d90",
                             Latitude = 457567215826950.15000000000000m,
                             Longitude = 212449256988964.84000000000000m,
                             Name = "3 August 1919",
-                            RouteId = "81fe3273-f393-451f-b81c-1dd7a9395c66"
+                            RouteId = "056ff285-3997-43dc-81a8-6a2dd7b0917c"
                         },
                         new
                         {
-                            Id = "ebc3df25-1080-43c0-9b35-a91212ff1196",
+                            Id = "614faa20-5903-41fc-b578-f4afc5634343",
                             Latitude = 457556223474490.30000000000000m,
                             Longitude = 212384271011132.56000000000000m,
                             Name = "Prefectura Judetului Timis",
-                            RouteId = "81fe3273-f393-451f-b81c-1dd7a9395c66"
+                            RouteId = "056ff285-3997-43dc-81a8-6a2dd7b0917c"
                         },
                         new
                         {
-                            Id = "c5caf246-2922-4f35-a463-992bdf34074b",
+                            Id = "ce384475-35dd-46b5-905c-485318c73c9f",
                             Latitude = 457557493352611.36000000000000m,
                             Longitude = 212318589875084.56000000000000m,
                             Name = "Hotel Continental",
-                            RouteId = "81fe3273-f393-451f-b81c-1dd7a9395c66"
+                            RouteId = "056ff285-3997-43dc-81a8-6a2dd7b0917c"
                         },
                         new
                         {
-                            Id = "9bb15c24-8049-4eb5-92f9-00494c92a00f",
+                            Id = "5dc85c72-08a0-45cd-a382-cd529c852412",
                             Latitude = 457558725046083.20000000000000m,
                             Longitude = 212276939799686.0000000000000m,
                             Name = "Piata Libertatii",
-                            RouteId = "81fe3273-f393-451f-b81c-1dd7a9395c66"
+                            RouteId = "056ff285-3997-43dc-81a8-6a2dd7b0917c"
                         },
                         new
                         {
-                            Id = "8ff7a375-6543-404a-9026-1d07c79265c8",
+                            Id = "a30744e4-a372-4d47-b299-47796e06801e",
                             Latitude = 457562516335078.50000000000000m,
                             Longitude = 212229088920353.74000000000000m,
                             Name = "Piata Timisoara 700",
-                            RouteId = "81fe3273-f393-451f-b81c-1dd7a9395c66"
+                            RouteId = "056ff285-3997-43dc-81a8-6a2dd7b0917c"
                         },
                         new
                         {
-                            Id = "b4204abd-8829-4f15-875a-7ca14a58a066",
+                            Id = "69be7f17-6029-4f61-92ee-88086239ec5e",
                             Latitude = 457561970168036.10000000000000m,
                             Longitude = 212213075532377.32000000000000m,
                             Name = "Brediceanu",
-                            RouteId = "81fe3273-f393-451f-b81c-1dd7a9395c66"
+                            RouteId = "056ff285-3997-43dc-81a8-6a2dd7b0917c"
                         },
                         new
                         {
-                            Id = "8cdccd81-1a76-4eee-853d-fbd5555c0070",
+                            Id = "57e58080-75da-445b-9e50-e9c41704fe8e",
                             Latitude = 457549076999152.70000000000000m,
                             Longitude = 212210508005243.03000000000000m,
                             Name = "Spitalul de copii",
-                            RouteId = "81fe3273-f393-451f-b81c-1dd7a9395c66"
+                            RouteId = "056ff285-3997-43dc-81a8-6a2dd7b0917c"
                         },
                         new
                         {
-                            Id = "d2ad6010-ed86-402f-888a-a07c31374f7b",
+                            Id = "5e3a8a07-89b9-41d8-951f-c2242c331d22",
                             Latitude = 457510922178538.20000000000000m,
                             Longitude = 212236185720668.60000000000000m,
                             Name = "Catedrala Metropolitana",
-                            RouteId = "81fe3273-f393-451f-b81c-1dd7a9395c66"
+                            RouteId = "056ff285-3997-43dc-81a8-6a2dd7b0917c"
                         },
                         new
                         {
-                            Id = "0e6ef67e-63fc-45d2-99d0-2bc0cc715b8e",
+                            Id = "a79866d2-9d8e-499b-915a-2fbb86b74a85",
                             Latitude = 457482785901011.70000000000000m,
                             Longitude = 212191745283552.70000000000000m,
                             Name = "Piata Maria",
-                            RouteId = "81fe3273-f393-451f-b81c-1dd7a9395c66"
+                            RouteId = "056ff285-3997-43dc-81a8-6a2dd7b0917c"
                         });
                 });
 
@@ -672,10 +674,6 @@ namespace rina.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("RouteId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Type")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -691,7 +689,6 @@ namespace rina.Data.Migrations
                             Latitude = 0m,
                             Longitude = 0m,
                             Name = "6",
-                            RouteId = "33e223ce-0f23-4197-9bce-4c357edde27f",
                             Type = "Tram"
                         });
                 });
@@ -722,8 +719,8 @@ namespace rina.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "c4c1c951-b95c-4db5-94f8-eb9375be05c4",
-                            DriverId = "f0efd0a3-6dec-4765-bc33-3d25f126f8d9",
+                            Id = "e7ea6fb6-171b-4c18-9cf1-d02f8b26ec5e",
+                            DriverId = "f7ecd26c-27b2-40e8-9f36-d1b9091b7a3b",
                             VehicleId = "2253d4b4-edba-4041-a314-22968193faf2"
                         });
                 });

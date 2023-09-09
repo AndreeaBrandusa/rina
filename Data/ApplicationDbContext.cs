@@ -133,6 +133,7 @@ namespace rina.Data
 
             #region Add Default Vehicle
             string vehicleId = "2253d4b4-edba-4041-a314-22968193faf2";
+            string routeId = Guid.NewGuid().ToString();
 
             builder.Entity<Vehicle>().HasData(new Vehicle
             {
@@ -140,7 +141,8 @@ namespace rina.Data
                 Name = "6",
                 Type = "Tram",
                 Latitude = 0,
-                Longitude = 0
+                Longitude = 0,
+                RouteId = routeId
             });
             #endregion Add Default Vehicle
 
@@ -154,8 +156,6 @@ namespace rina.Data
             #endregion Add Default VehicleDriver
 
             #region Add default Routes
-            string routeId = Guid.NewGuid().ToString();
-
             builder.Entity<Entities.Route>().HasData(new Entities.Route
             {
                 RouteId = routeId,
