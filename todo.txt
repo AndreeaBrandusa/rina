@@ -1,10 +1,8 @@
 ﻿
 - show driver on route
-- search destination
 
 - bus simulator
 
-- show destination route
 - show stations on map
 
 

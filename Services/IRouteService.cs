@@ -6,5 +6,6 @@ namespace rina.Services
     {
         Task<List<Entities.Route>> GetRoutes();
         Task<bool> AddRouteWithStationsAsync(RouteModel model);
+        Entities.Route GetRouteByVehicleName(string vehicleName);
     }
 }

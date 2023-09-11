@@ -15,6 +15,11 @@ namespace rina.Services
             _context = context;
         }
 
+        public async Task<List<Entities.Route>> GetVehicles()
+        {
+            return await _context.Route.ToListAsync();
+        }
+
         public async Task<bool> AddVehicleAsync(VehicleModel vehicleModel)
         {
             if (vehicleModel is null) 

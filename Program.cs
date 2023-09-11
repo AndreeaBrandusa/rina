@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using rina.Data;
 using rina.Services;
 using rina.Entities;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -27,6 +28,11 @@ builder.Services.AddAuthorization(options =>
 });
 
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddControllers().AddJsonOptions(options =>
+{
+    options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve;
+});
 
 builder.Services.AddScoped<IdentityService>();
 builder.Services.AddScoped<IVehicleService, VehicleService>();

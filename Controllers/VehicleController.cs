@@ -51,7 +51,6 @@ namespace rina.Controllers
             return View();
         }
 
-
         [HttpPost]
         public async Task<IActionResult> AddVehicle(VehicleModel model)
         {

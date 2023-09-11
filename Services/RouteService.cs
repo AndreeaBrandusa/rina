@@ -16,6 +16,24 @@ namespace rina.Services
             _context = context;
         }
 
+        public Task<Entities.Route> GetRouteById(string routeId)
+        {
+            return _context.Route.FirstOrDefaultAsync(x => x.RouteId == routeId);
+        }
+
+        public Entities.Route GetRouteByVehicleName(string vehicleName)
+        {
+            var vehicle = _context.Vehicle.FirstOrDefault(x => x.Name == vehicleName);
+
+            Console.WriteLine(vehicleName);
+
+            if (vehicle != null && vehicle.RouteId != null)
+            {
+                return _context.Route.FirstOrDefault(x => x.RouteId == vehicle.RouteId);
+            }
+            return null;
+        }
+
         public async Task<List<Entities.Route>> GetRoutes()
         {
             return await _context.Route.ToListAsync();

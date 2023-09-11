@@ -25,12 +25,19 @@ namespace rina.Controllers
             return new OkObjectResult(await _stationService.GetStationsAsync(routeId));
         }
 
+
+        [Authorize(Roles = "User")]
+        public async Task<IActionResult> GetStationsForUser(string routeId)
+        {
+            return new OkObjectResult(await _stationService.GetStationsAsync(routeId));
+        }
+
+
         [Authorize(Roles = "Administrator")]
         public IActionResult AddStation()
         {
             return View();
         }
-
 
         [HttpPost]
         [Authorize(Roles = "Administrator")]

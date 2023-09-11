@@ -5,14 +5,16 @@ using rina.Services;
 
 namespace rina.Controllers
 {
-    [Authorize(Roles = "Administrator")]
+    
     public class RouteController : Controller
     {
         private readonly IRouteService _routeService;
+        private readonly IVehicleService _vehicleService;
 
-        public RouteController(IRouteService stationService)
+        public RouteController(IRouteService stationService , IVehicleService vehicleService)
         {
             _routeService = stationService;
+            _vehicleService = vehicleService;
         }
 
         public IActionResult Index()
@@ -20,12 +22,28 @@ namespace rina.Controllers
             return View();
         }
 
+        public IActionResult GetRouteByVehicleName(string vehicleName)
+        {
+            var route = _routeService.GetRouteByVehicleName(vehicleName);
+
+            if (route != null)
+            {
+                return Ok(route);
+            }
+            else
+            {
+                return NotFound($"Route with vehicle name '{vehicleName}' not found.");
+            }
+        }
+
+        [Authorize(Roles = "Administrator")]
         public IActionResult AddRoute()
         {
             return View();
         }
 
         [HttpPost]
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> AddRoute([FromBody] RouteModel model)
         {
             if (!await _routeService.AddRouteWithStationsAsync(model))

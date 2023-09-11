@@ -20,7 +20,18 @@ namespace rina.Services
             return ConvertCoordinatesFromDatabase(await _context.Station.FirstOrDefaultAsync(x => x.Id == stationId));
         }
 
+        /*public async Task<Station> GetStationByNameAsync(string stationName)
+        {
+            return ConvertCoordinatesFromDatabase(await _context.Station.FirstOrDefaultAsync(x => x.Name == stationName));
+        }*/
+
         public async Task<List<Station>> GetStationsAsync(string routeId)
+        {
+            var list = await _context.Station.Where(x => x.RouteId == routeId).ToListAsync();
+            return list.Select(x => ConvertCoordinatesFromDatabase(x)).ToList();
+        }
+
+        public async Task<List<Station>> GetStationsForUserAsync(string routeId)
         {
             var list = await _context.Station.Where(x => x.RouteId == routeId).ToListAsync();
             return list.Select(x => ConvertCoordinatesFromDatabase(x)).ToList();
