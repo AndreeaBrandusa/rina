@@ -4,6 +4,8 @@
 @*for destination*@
 <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.1.1/mapbox-gl-directions.js"></script>
 <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.1.1/mapbox-gl-directions.css" type="text/css">
+<script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-draw/v1.0.9/mapbox-gl-draw.js'></script>
+<link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-draw/v1.0.9/mapbox-gl-draw.css' type='text/css' />
 
 <div id="map"></div>
 
@@ -33,12 +35,12 @@
     <div class="left-container">
         <input type="text" placeholder="enter vehicle name">
 
-        <button id="btn" class="btn btn-outline-success my-2 my-sm-0" type="submit" style="float: right; margin-top: 5px!important;">
+        <button id="btn" class="btn btn-outline-success my-2 my-sm-0" type="button" style="float: right; margin-top: 5px!important;">
             Navigate
         </button>
 
-        <fieldset id="breakdownReason" class="p-3" style="border: 1px solid #ad5049; margin-top: 60vh; margin-bottom: 10vh;">
-            <legend class="float-none w-auto px-3" style="text-align: left; font-size: 0.9rem; color: #91403a;">
+        <fieldset id="breakdownReason" class="p-3" style="border: 2px solid #ad5049; margin-top: 60vh; margin-bottom: 10vh;">
+            <legend class="float-none w-auto px-3" style="text-align: left; font-size: 0.9rem; color: white;">
                 Select breakdown reason
             </legend>
             <select name="delayReason" id="select" autocomplete="off" required style="width: 100%; padding: 5px 0 5px 0; color: gray;">
@@ -62,6 +64,7 @@
             btn.textContent = 'End trip';
           } else {
             btn.textContent = initialText;
+            display_stations();
           }
         });
 
@@ -78,6 +81,77 @@
                 showUserHeading: true
             })
         );
+
+
+        function display_stations() {
+            fetch("/Station/GetStations/?routeId=81fe3273-f393-451f-b81c-1dd7a9395c66")
+                .then(response => response.json())
+                .then(data => get_stations(data))
+                .catch(error => console.error('Unable to get stations', error));
+        }
+
+        const lineString = {
+            "type": "LineString",
+            "coordinates": []
+        }
+
+        function get_stations(stations) {
+            for (let i = 1; i < stations.length; i++){
+                coords = `${stations[i].longitude},${stations[i].latitude};${stations[i-1].longitude},${stations[i-1].latitude}`;
+
+                console.log(coords);
+                //coords = coords.slice(0,-1);
+
+                getMatch(coords, i, stations.length);
+            }
+            
+        }
+
+        function getMatch(coords, i, stationsLength) {
+            fetch(
+                `https://api.mapbox.com/directions/v5/mapbox/driving/${coords}?access_token=${mapboxgl.accessToken}`,
+                { method: 'GET' }
+            )
+            .then((response) => response.json())
+            .then((data) => {
+                console.log(data);
+                var route = data.routes[0].geometry;
+                var decodedRoute = polyline.toGeoJSON(route);
+
+                console.log(decodedRoute);
+                lineString.coordinates.push(decodedRoute.coordinates);
+
+                if (i == stationsLength - 1) {
+                    addRoute(decodedRoute);
+                }
+            });
+  
+        }
+
+        function addRoute(decodedRoute) {
+            map.addSource('route', {
+                'type': 'geojson',
+                'data': {
+                    'type': 'Feature',
+                    'properties': {},
+                    'geometry': decodedRoute
+                }
+            });
+            map.addLayer({
+                'id': 'route',
+                'type': 'line',
+                'source': 'route',
+                'layout': {
+                    'line-join': 'round',
+                    'line-cap': 'round'
+                },
+                'paint': {
+                    'line-color': '#bf5d56',
+                    'line-width': 8,
+                    'line-opacity': 0.8
+                }
+            });
+        }
     </script>
 }
 

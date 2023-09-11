@@ -1,11 +1,12 @@
 ﻿
-- add vehicle /
-- show stations on map
 - show driver on route
 - search destination
-- show destination route
 
 - bus simulator
+
+- show destination route
+- show stations on map
+
 
 optional:
 - print errors when signing in/creating new acc

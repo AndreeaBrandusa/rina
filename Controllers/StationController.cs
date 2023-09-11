@@ -5,7 +5,6 @@ using rina.Services;
 
 namespace rina.Controllers
 {
-    [Authorize(Roles = "Administrator")]
     public class StationController : Controller
     {
         private readonly IStationService _stationService;
@@ -20,11 +19,13 @@ namespace rina.Controllers
             return View();
         }
 
-        public async Task<IActionResult> Stations(string routeId)
+        [Authorize(Roles = "Driver")]
+        public async Task<IActionResult> GetStations(string routeId)
         {
             return new OkObjectResult(await _stationService.GetStationsAsync(routeId));
         }
 
+        [Authorize(Roles = "Administrator")]
         public IActionResult AddStation()
         {
             return View();
@@ -32,6 +33,7 @@ namespace rina.Controllers
 
 
         [HttpPost]
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> AddStation(StationModel model)
         {
             if (!await _stationService.AddStationAsync(model))
