@@ -21,6 +21,19 @@
     // Add zoom and rotation controls to the map.
     map.addControl(new mapboxgl.NavigationControl());
 
+    // Add geolocate control to the map
+    map.addControl(
+        new mapboxgl.GeolocateControl({
+            positionOptions: {
+                enableHighAccuracy: true
+            },
+            // When active the map will receive updates to the device's location as it changes.
+            trackUserLocation: true,
+            // Draw an arrow next to the location dot to indicate which direction the device is heading.
+            showUserHeading: true
+        })
+    );
+
 </script>
 
 @if (User.IsInRole("Administrator"))
@@ -56,6 +69,8 @@
     </div>
 
     <script>
+        var currentMarkers=[];
+
         const btn = document.getElementById('btn');
         // Toggle button text on click
         btn.addEventListener('click', function handleClick() {
@@ -70,19 +85,6 @@
             }
         });
 
-
-        // Add geolocate control to the map
-        map.addControl(
-            new mapboxgl.GeolocateControl({
-                positionOptions: {
-                    enableHighAccuracy: true
-                },
-                // When active the map will receive updates to the device's location as it changes.
-                trackUserLocation: true,
-                // Draw an arrow next to the location dot to indicate which direction the device is heading.
-                showUserHeading: true
-            })
-        );
 
         document.addEventListener('DOMContentLoaded', function () {
             const btn = document.getElementById('btn');
@@ -129,11 +131,29 @@
         }
 
         function get_stations(stations) {
-            console.log(stations);
+            var marker;
+            marker = new mapboxgl.Marker({
+                color: '#bf5d56',
+                scale: 1.2,
+                type: 'Point'
+            })
+            .setLngLat([stations[0].longitude, stations[0].latitude])
+            .addTo(map)
+            currentMarkers.push(marker);
+
             for (let i = 1; i < stations.length; i++){
                 coords = `${stations[i].longitude},${stations[i].latitude};${stations[i-1].longitude},${stations[i-1].latitude}`;
-
                 console.log(coords);
+
+                marker = new mapboxgl.Marker({
+                    color: '#bf5d56',
+                    scale: 1.2,
+                    type: 'Point'
+                })
+                .setLngLat([stations[i].longitude, stations[i].latitude])
+                .addTo(map)
+                currentMarkers.push(marker);
+
                 getMatch(coords, i, stations.length);
             }
         }
@@ -164,6 +184,11 @@
             if (map.getSource('route')) {
                 map.removeLayer('route');
                 map.removeSource('route');
+                if (currentMarkers!==null) {
+                    for (var i = currentMarkers.length - 1; i >= 0; i--) {
+                      currentMarkers[i].remove();
+                    }
+                }
             } else {
                 map.addSource('route', {
                     'type': 'geojson',
@@ -204,35 +229,20 @@
     </div>
 
     <script>
+        var currentMarkers=[];
+        
         const btn = document.getElementById('btn');
         // Toggle button text on click
         btn.addEventListener('click', function handleClick() {
               const initialText = 'Search';
 
             if (btn.textContent.toLowerCase().includes(initialText.toLowerCase())) {
-                //display_stations();
                     btn.textContent = 'Remove route';
                 } else {
                     btn.textContent = initialText;
-                    //display_stations();
             }
         });
 
-
-        // Add geolocate control to the map
-        map.addControl(
-            new mapboxgl.GeolocateControl({
-                positionOptions: {
-                    enableHighAccuracy: true
-                },
-
-                // When active the map will receive updates to the device's location as it changes.
-                trackUserLocation: true,
-
-                // Draw an arrow next to the location dot to indicate which direction the device is heading.
-                showUserHeading: true
-            })
-        );
 
         document.addEventListener('DOMContentLoaded', function () {
             const btn = document.getElementById('btn');
@@ -279,13 +289,31 @@
         }
 
         function get_stations(stations) {
+            var marker;
+            marker = new mapboxgl.Marker({
+                color: '#bf5d56',
+                scale: 1.2,
+                type: 'Point'
+            })
+            .setLngLat([stations[0].longitude, stations[0].latitude])
+            .addTo(map)
+            currentMarkers.push(marker);
+
             for (let i = 1; i < stations.length; i++){
                 coords = `${stations[i].longitude},${stations[i].latitude};${stations[i-1].longitude},${stations[i-1].latitude}`;
-
                 console.log(coords);
+
+                marker = new mapboxgl.Marker({
+                    color: '#bf5d56',
+                    scale: 1.2,
+                    type: 'Point'
+                })
+                .setLngLat([stations[i].longitude, stations[i].latitude])
+                .addTo(map)
+                currentMarkers.push(marker);
+
                 getMatch(coords, i, stations.length);
             }
-            
         }
 
         function getMatch(coords, i, stationsLength) {
@@ -313,6 +341,11 @@
             if (map.getSource('route')) {
                 map.removeLayer('route');
                 map.removeSource('route');
+                if (currentMarkers!==null) {
+                    for (var i = currentMarkers.length - 1; i >= 0; i--) {
+                      currentMarkers[i].remove();
+                    }
+                }
             } else {
                 map.addSource('route', {
                     'type': 'geojson',

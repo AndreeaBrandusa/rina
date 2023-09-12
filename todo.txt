@@ -3,8 +3,6 @@
 
 - bus simulator
 
-- show stations on map
-
 
 optional:
 - print errors when signing in/creating new acc

@@ -57,7 +57,7 @@ namespace rina.Services
                 return new AuthenticationResult();
             }
 
-            if (!await RegisterAccountAsync(model))
+            if (!await RegisterUserAccountAsync(model))
             {
                 // unable to register account
                 return new AuthenticationResult();
@@ -197,7 +197,23 @@ namespace rina.Services
             return result.Succeeded;
         }
 
-        private async Task<bool> CanRegister(string username, string email)
+
+        private async Task<bool> RegisterUserAccountAsync(RegisterModel model)
+        {
+            var result = await _userManager.CreateAsync(RegisterModelToIdentityUser(model), model.Password);
+            var user = await _userManager.FindByNameAsync(model.Username);
+            var hasRole = await _userManager.GetRolesAsync(user);
+
+            if (hasRole.Count == 0)
+            {
+                await _userManager.AddToRoleAsync(user, "User");
+            }
+
+            return result.Succeeded;
+        }  
+    
+
+    private async Task<bool> CanRegister(string username, string email)
         {
             if ((await _userManager.FindByNameAsync(username)) != null)
             {
